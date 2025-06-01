@@ -1,6 +1,8 @@
 import 'package:cltxpj/controller/calculate_controller.dart';
 import 'package:cltxpj/features/app_theme.dart';
+import 'package:cltxpj/utils/chart_data_hepler.dart';
 import 'package:cltxpj/view/components/input_field.dart';
+import 'package:cltxpj/view/components/pie_chart_widget.dart';
 import 'package:cltxpj/view/widgets/responsive_scaffold.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -72,20 +74,32 @@ class _HomePageState extends State<HomePage> {
     final totalPj = controller.totalPj;
     final difference = (totalClt - totalPj).abs();
 
+    final chartData = ChartDataHelper.buildResultChartData(
+      cltNet: totalClt,
+      pjNet: totalPj,
+    );
+
+    final colorList = [Colors.blue, Colors.green];
+
     showDialog(
       context: context,
       builder:
           (_) => AlertDialog(
-            title: const Text('Result'),
+            title: const Text('Resultado'),
             content: Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('💼 CLT Net: ${currencyFormat.format(totalClt)}'),
-                Text('🧑‍💻 PJ Net: ${currencyFormat.format(totalPj)}'),
+                PieChartWidget(
+                  dataMap: chartData,
+                  colorList: colorList,
+                  size: 180, // controla o tamanho aqui
+                ),
+                const SizedBox(height: 16),
+                Text('💼 CLT Líquido: ${currencyFormat.format(totalClt)}'),
+                Text('🧑‍💻 PJ Líquido: ${currencyFormat.format(totalPj)}'),
                 const SizedBox(height: 8),
                 Text(
-                  'Difference: ${currencyFormat.format(difference)}',
+                  'Diferença: ${currencyFormat.format(difference)}',
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
@@ -98,7 +112,7 @@ class _HomePageState extends State<HomePage> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Close'),
+                child: const Text('Fechar'),
               ),
             ],
           ),
@@ -134,7 +148,7 @@ class _HomePageState extends State<HomePage> {
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(padding),
+          padding: EdgeInsets.fromLTRB(padding, padding + 90, padding, padding),
           child: Form(
             key: _formKey,
             child: Column(
@@ -144,21 +158,25 @@ class _HomePageState extends State<HomePage> {
                   label: 'CLT Salary',
                   controller: salaryCltController,
                   validator: _validator,
+                  icon: Icons.money,
                 ),
                 InputField(
                   label: 'PJ Salary',
                   controller: salaryPjController,
                   validator: _validator,
+                  icon: Icons.money,
                 ),
                 InputField(
                   label: 'CLT Benefits',
                   controller: benefitsController,
                   validator: _validator,
+                  icon: Icons.portable_wifi_off_sharp,
                 ),
                 InputField(
                   label: 'PJ Taxes (%)',
                   controller: taxesPjController,
                   validator: _validator,
+                  icon: Icons.transcribe_outlined,
                 ),
                 const SizedBox(height: 20),
                 GFButton(
