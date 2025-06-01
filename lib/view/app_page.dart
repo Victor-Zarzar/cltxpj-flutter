@@ -1,4 +1,13 @@
+import 'package:cltxpj/controller/locale_controller.dart';
+import 'package:cltxpj/features/app_theme.dart';
+import 'package:cltxpj/view/about_page.dart';
+import 'package:cltxpj/view/home_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/components/tabs/gf_tabbar.dart';
+import 'package:getwidget/components/tabs/gf_tabbar_view.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class AppPage extends StatefulWidget {
   const AppPage({super.key});
@@ -18,7 +27,62 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container();
+    final currentLocale = context.locale;
+    return Consumer<LocaleController>(
+      builder: (context, languageProvider, child) {
+        double myHeight = MediaQuery.of(context).size.height;
+        double myWidth = MediaQuery.of(context).size.width;
+        return Scaffold(
+          body: SizedBox(
+            key: ValueKey(currentLocale),
+            height: myHeight,
+            width: myWidth,
+            child: GFTabBarView(
+              key: _tabBarKey,
+              controller: tabController,
+              children: const <Widget>[HomePage(), AboutPage()],
+            ),
+          ),
+          bottomNavigationBar: GFTabBar(
+            tabBarHeight: 90,
+            length: 2,
+            controller: tabController,
+            tabBarColor: TabBarColor.primaryColor,
+            labelColor: TextColor.primaryColor,
+            indicatorColor: TextColor.primaryColor,
+            labelStyle: GoogleFonts.roboto(
+              textStyle: const TextStyle(fontSize: 14),
+            ),
+            tabs: [
+              Tab(
+                icon: Icon(
+                  Icons.money,
+                  size: 23,
+                  color: IconColor.primaryColor,
+                ),
+                child: Text(
+                  'home'.tr(),
+                  style: GoogleFonts.roboto(color: TextColor.primaryColor),
+                ),
+              ),
+              Tab(
+                icon: Icon(Icons.info, size: 23, color: IconColor.primaryColor),
+                child: Text(
+                  'about'.tr(),
+                  style: GoogleFonts.roboto(color: TextColor.primaryColor),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
