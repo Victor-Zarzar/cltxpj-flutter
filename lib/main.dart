@@ -1,3 +1,4 @@
+import 'package:cltxpj/controller/calculate_controller.dart';
 import 'package:cltxpj/controller/locale_controller.dart';
 import 'package:cltxpj/controller/notification_controller.dart';
 import 'package:cltxpj/services/notification_service.dart';
@@ -26,6 +27,7 @@ void main() async {
         providers: [
           ChangeNotifierProvider(create: (_) => NotificationController()),
           ChangeNotifierProvider(create: (_) => LocaleController()),
+          ChangeNotifierProvider(create: (_) => CalculatorController()),
         ],
         child: const MyApp(),
       ),
@@ -46,7 +48,6 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'CLT X PJ',
-      theme: ThemeData(useMaterial3: true),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
