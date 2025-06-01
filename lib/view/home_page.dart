@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                 PieChartWidget(
                   dataMap: chartData,
                   colorList: colorList,
-                  size: 180, // controla o tamanho aqui
+                  size: 180,
                 ),
                 const SizedBox(height: 16),
                 Text('💼 CLT Líquido: ${currencyFormat.format(totalClt)}'),

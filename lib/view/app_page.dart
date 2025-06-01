@@ -2,6 +2,7 @@ import 'package:cltxpj/controller/locale_controller.dart';
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/view/about_page.dart';
 import 'package:cltxpj/view/home_page.dart';
+import 'package:cltxpj/view/settings_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/tabs/gf_tabbar.dart';
@@ -23,7 +24,7 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -47,12 +48,12 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
             child: GFTabBarView(
               key: _tabBarKey,
               controller: tabController,
-              children: const <Widget>[HomePage(), AboutPage()],
+              children: const <Widget>[HomePage(), AboutPage(), SettingsPage()],
             ),
           ),
           bottomNavigationBar: GFTabBar(
             tabBarHeight: 90,
-            length: 2,
+            length: 3,
             controller: tabController,
             tabBarColor: TabBarColor.primaryColor,
             labelColor: TextColor.primaryColor,
@@ -76,6 +77,17 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
                 icon: Icon(Icons.info, size: 23, color: IconColor.primaryColor),
                 child: Text(
                   'about'.tr(),
+                  style: GoogleFonts.roboto(color: TextColor.primaryColor),
+                ),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.settings,
+                  size: 23,
+                  color: IconColor.primaryColor,
+                ),
+                child: Text(
+                  'settings'.tr(),
                   style: GoogleFonts.roboto(color: TextColor.primaryColor),
                 ),
               ),

@@ -1,16 +1,45 @@
-# cltxpj
+<h1 align="center" id="header">
+ CLT x PJ App Flutter - Android/iOS - Web
+</h1>
 
-A new Flutter project.
+🤖 Stack:
 
-## Getting Started
+- Dart
+- Flutter
+- Get Widget UI
+- Google Fonts
+- Locale Language EN / PT-BR / ES
+- Flutter local notifications
+- Url Launcher
+- Timezone
+- Provider (State Managment)
+- Flutter Secure Storage
+- DontEnv
+- PierChart
+- Docker (Version WEB)
 
-This project is a starting point for a Flutter application.
+<br />
 
-A few resources to get you started if this is your first Flutter project:
+⚙️ How to install:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Project Clone
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+     git clone https://github.com/Victor-Zarzar/cltxpj-flutter
+
+Enter in directory:
+
+     cd cltxpj-flutter
+
+Open in your favorite editor(e.g. VSCode):
+
+    code .
+
+For install dependencies:
+
+    flutter pub get
+
+Run the app:
+
+    flutter run
+
+### Archictecture:
