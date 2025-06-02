@@ -1,24 +1,24 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-class AppTheme {
-  AppTheme._();
+class AppThemeColor {
+  AppThemeColor._();
   static Color get primaryColor => const Color(0xFF1B5E20);
   static Color get secondaryColor => const Color(0xFF2E7D32);
   static Color get thirdColor => const Color(0xFF81C784);
   static Color get fourthColor => const Color(0xFF000000);
 }
 
-class AppBar {
-  AppBar._();
+class AppBarColor {
+  AppBarColor._();
   static Color get primaryColor => const Color(0xFF1B5E20);
   static Color get secondaryColor => const Color(0xFF2E7D32);
   static Color get thirdColor => const Color(0xFF81C784);
   static Color get fourthColor => const Color(0xFF000000);
 }
 
-class BackGround {
-  BackGround._();
+class BackGroundColor {
+  BackGroundColor._();
   static Color get primaryColor => const Color(0xFF0D1B0F);
   static Color get secondaryColor => const Color(0xFFF1F8E9);
   static Color get thirdColor => const Color(0xFF212121);
@@ -57,12 +57,12 @@ class TextFormColor {
   static Color get fourthColor => const Color(0xFF000000);
 }
 
-class Button {
-  Button._();
+class ButtonColor {
+  ButtonColor._();
   static Color get primaryColor => const Color(0xFF4CAF50);
   static Color get secondaryColor => const Color(0xFF66BB6A);
   static Color get thirdColor => const Color(0xFF81C784);
-  static Color get fourthColor => const Color(0xFF000000);
+  static Color get fourthColor => const Color(0xFF212121);
 }
 
 class TextButtonColor {

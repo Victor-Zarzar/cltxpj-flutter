@@ -28,7 +28,9 @@ class _SettingsPageState extends State<SettingsPage> {
         return Scaffold(
           appBar: GFAppBar(
             backgroundColor:
-                notifier.isDark ? AppTheme.fourthColor : AppTheme.primaryColor,
+                notifier.isDark
+                    ? AppBarColor.fourthColor
+                    : AppBarColor.secondaryColor,
             automaticallyImplyLeading: false,
             centerTitle: true,
             title: Text(
@@ -48,8 +50,8 @@ class _SettingsPageState extends State<SettingsPage> {
           body: Container(
             color:
                 notifier.isDark
-                    ? BackGround.fourthColor
-                    : BackGround.primaryColor,
+                    ? BackGroundColor.fourthColor
+                    : BackGroundColor.primaryColor,
             child: SizedBox(
               height: myHeight,
               width: myWidth,
@@ -103,7 +105,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ),
                     trailing: PopupMenuButton<Locale>(
-                      color: AppTheme.thirdColor,
+                      color: AppThemeColor.thirdColor,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),

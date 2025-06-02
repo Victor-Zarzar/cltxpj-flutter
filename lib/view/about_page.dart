@@ -30,7 +30,9 @@ class _AboutPageState extends State<AboutPage> {
       builder: (context, notifier, child) {
         return Scaffold(
           backgroundColor:
-              notifier.isDark ? AppTheme.fourthColor : BackGround.primaryColor,
+              notifier.isDark
+                  ? BackGroundColor.fourthColor
+                  : BackGroundColor.primaryColor,
           body: SizedBox(
             height: myHeight,
             width: myWidth,
@@ -42,8 +44,8 @@ class _AboutPageState extends State<AboutPage> {
                     centerTitle: true,
                     backgroundColor:
                         notifier.isDark
-                            ? AppTheme.fourthColor
-                            : AppTheme.primaryColor,
+                            ? AppBarColor.fourthColor
+                            : AppBarColor.secondaryColor,
                     title: Text(
                       "about".tr(),
                       style: GoogleFonts.jetBrainsMono(
