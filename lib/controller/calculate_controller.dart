@@ -1,4 +1,5 @@
 import 'package:cltxpj/model/calculate_model.dart';
+import 'package:cltxpj/utils/salary_helper.dart';
 import 'package:flutter/material.dart';
 import '../services/storage_service.dart';
 
@@ -10,22 +11,32 @@ class CalculatorController extends ChangeNotifier {
     taxesPj: 0,
   );
 
-  double get totalClt => model.salaryClt + model.benefits;
+  double get totalClt {
+    final inss = calculateInss(model.salaryClt);
+    final irrf = calculateIrrf(model.salaryClt);
+    return model.salaryClt - inss - irrf + model.benefits;
+  }
 
   double get totalPj {
-    final tax = model.salaryPj * (model.taxesPj / 100);
-    return model.salaryPj - tax;
+    final taxPj = model.salaryPj * (model.taxesPj / 100);
+    final inss = model.salaryPj * model.inssPj;
+    final accountantFee = model.accountantFee;
+
+    final totalDiscounts = taxPj + inss + accountantFee;
+    final netPj = model.salaryPj - totalDiscounts;
+
+    return netPj;
   }
 
   String get bestOption {
+    final diff = (totalClt - totalPj).abs();
+
     if (totalClt > totalPj) {
-      final diff = totalClt - totalPj;
-      return "CLT is better by ${diff.toStringAsFixed(2)}";
+      return "CLT é melhor por R\$ ${diff.toStringAsFixed(2)}";
     } else if (totalPj > totalClt) {
-      final diff = totalPj - totalClt;
-      return "PJ is better by ${diff.toStringAsFixed(2)}";
+      return "PJ é melhor por R\$ ${diff.toStringAsFixed(2)}";
     } else {
-      return "It's a tie";
+      return "Empate perfeito";
     }
   }
 
@@ -34,12 +45,16 @@ class CalculatorController extends ChangeNotifier {
     required double salaryPj,
     required double benefits,
     required double taxesPj,
+    double accountantFee = 189.0,
+    double inssPj = 0.11,
   }) {
     model = CalculatorModel(
       salaryClt: salaryClt,
       salaryPj: salaryPj,
       benefits: benefits,
       taxesPj: taxesPj,
+      accountantFee: accountantFee,
+      inssPj: inssPj,
     );
     StorageService.saveData(model);
     notifyListeners();
