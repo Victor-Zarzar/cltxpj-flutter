@@ -1,6 +1,7 @@
 import 'package:cltxpj/controller/calculate_controller.dart';
 import 'package:cltxpj/controller/locale_controller.dart';
 import 'package:cltxpj/controller/notification_controller.dart';
+import 'package:cltxpj/features/theme_provider.dart';
 import 'package:cltxpj/services/notification_service.dart';
 import 'package:cltxpj/view/app_page.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -28,6 +29,7 @@ void main() async {
           ChangeNotifierProvider(create: (_) => NotificationController()),
           ChangeNotifierProvider(create: (_) => LocaleController()),
           ChangeNotifierProvider(create: (_) => CalculatorController()),
+          ChangeNotifierProvider(create: (_) => UiProvider()..init()),
         ],
         child: const MyApp(),
       ),
@@ -45,13 +47,19 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'CLT X PJ',
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      home: AppPage(),
+    return Consumer<UiProvider>(
+      builder: (context, UiProvider notifier, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'CLT X PJ',
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          home: AppPage(),
+          themeMode: notifier.isDark ? ThemeMode.dark : ThemeMode.light,
+          darkTheme: notifier.isDark ? notifier.darkTheme : notifier.lightTheme,
+        );
+      },
     );
   }
 }
