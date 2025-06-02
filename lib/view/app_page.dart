@@ -1,5 +1,6 @@
 import 'package:cltxpj/controller/locale_controller.dart';
 import 'package:cltxpj/features/app_theme.dart';
+import 'package:cltxpj/features/theme_provider.dart';
 import 'package:cltxpj/view/about_page.dart';
 import 'package:cltxpj/view/home_page.dart';
 import 'package:cltxpj/view/settings_page.dart';
@@ -38,6 +39,7 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
     final currentLocale = context.locale;
     return Consumer<LocaleController>(
       builder: (context, languageProvider, child) {
+        final notifier = context.watch<UiProvider>();
         double myHeight = MediaQuery.of(context).size.height;
         double myWidth = MediaQuery.of(context).size.width;
         return Scaffold(
@@ -55,7 +57,10 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
             tabBarHeight: 90,
             length: 3,
             controller: tabController,
-            tabBarColor: TabBarColor.primaryColor,
+            tabBarColor:
+                notifier.isDark
+                    ? TabBarColor.fourthColor
+                    : TabBarColor.primaryColor,
             labelColor: TextColor.primaryColor,
             indicatorColor: TextColor.primaryColor,
             labelStyle: GoogleFonts.roboto(

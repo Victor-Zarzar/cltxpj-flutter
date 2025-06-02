@@ -1,5 +1,6 @@
 import 'package:cltxpj/controller/calculate_controller.dart';
 import 'package:cltxpj/features/app_theme.dart';
+import 'package:cltxpj/features/theme_provider.dart';
 import 'package:cltxpj/utils/chart_data_hepler.dart';
 import 'package:cltxpj/view/components/input_field.dart';
 import 'package:cltxpj/view/components/pie_chart_widget.dart';
@@ -128,85 +129,108 @@ class _HomePageState extends State<HomePage> {
   Widget _buildFormLayout({required double padding}) {
     final controller = context.watch<CalculatorController>();
 
-    return Scaffold(
-      appBar: GFAppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        backgroundColor: AppTheme.thirdColor,
-        title: Text(
-          'app_bar_title'.tr(),
-          style: GoogleFonts.roboto(
-            textStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: TextColor.primaryColor,
+    return Consumer<UiProvider>(
+      builder: (context, notifier, child) {
+        return Scaffold(
+          appBar: GFAppBar(
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            backgroundColor:
+                notifier.isDark
+                    ? AppBarColor.fourthColor
+                    : AppBarColor.secondaryColor,
+            title: Text(
+              'app_bar_title'.tr(),
+              style: GoogleFonts.roboto(
+                textStyle: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: TextColor.primaryColor,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-      backgroundColor: BackGround.primaryColor,
-      body: GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(padding, padding + 90, padding, padding),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                InputField(
-                  label: 'CLT Salary',
-                  controller: salaryCltController,
-                  validator: _validator,
-                  icon: Icons.money,
+          backgroundColor:
+              notifier.isDark
+                  ? BackGroundColor.fourthColor
+                  : BackGroundColor.primaryColor,
+          body: GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(
+                padding,
+                padding + 90,
+                padding,
+                padding,
+              ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    InputField(
+                      label: 'CLT Salary',
+                      controller: salaryCltController,
+                      validator: _validator,
+                      icon: Icons.money,
+                      maxWidth: 600,
+                    ),
+                    InputField(
+                      label: 'PJ Salary',
+                      controller: salaryPjController,
+                      validator: _validator,
+                      icon: Icons.money,
+                      maxWidth: 600,
+                    ),
+                    InputField(
+                      label: 'CLT Benefits',
+                      controller: benefitsController,
+                      validator: _validator,
+                      icon: Icons.portable_wifi_off_sharp,
+                      maxWidth: 600,
+                    ),
+                    InputField(
+                      label: 'PJ Taxes (%)',
+                      controller: taxesPjController,
+                      validator: _validator,
+                      icon: Icons.transcribe_outlined,
+                      maxWidth: 600,
+                    ),
+                    const SizedBox(height: 20),
+                    GFButton(
+                      color:
+                          notifier.isDark
+                              ? ButtonColor.fourthColor
+                              : ButtonColor.primaryColor,
+
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          controller.updateValues(
+                            salaryClt: double.parse(
+                              salaryCltController.text.replaceAll(',', '.'),
+                            ),
+                            salaryPj: double.parse(
+                              salaryPjController.text.replaceAll(',', '.'),
+                            ),
+                            benefits: double.parse(
+                              benefitsController.text.replaceAll(',', '.'),
+                            ),
+                            taxesPj: double.parse(
+                              taxesPjController.text.replaceAll(',', '.'),
+                            ),
+                          );
+                          _showResult();
+                        }
+                      },
+                      child: const Text('Calculate'),
+                    ),
+                  ],
                 ),
-                InputField(
-                  label: 'PJ Salary',
-                  controller: salaryPjController,
-                  validator: _validator,
-                  icon: Icons.money,
-                ),
-                InputField(
-                  label: 'CLT Benefits',
-                  controller: benefitsController,
-                  validator: _validator,
-                  icon: Icons.portable_wifi_off_sharp,
-                ),
-                InputField(
-                  label: 'PJ Taxes (%)',
-                  controller: taxesPjController,
-                  validator: _validator,
-                  icon: Icons.transcribe_outlined,
-                ),
-                const SizedBox(height: 20),
-                GFButton(
-                  color: Button.primaryColor,
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      controller.updateValues(
-                        salaryClt: double.parse(
-                          salaryCltController.text.replaceAll(',', '.'),
-                        ),
-                        salaryPj: double.parse(
-                          salaryPjController.text.replaceAll(',', '.'),
-                        ),
-                        benefits: double.parse(
-                          benefitsController.text.replaceAll(',', '.'),
-                        ),
-                        taxesPj: double.parse(
-                          taxesPjController.text.replaceAll(',', '.'),
-                        ),
-                      );
-                      _showResult();
-                    }
-                  },
-                  child: const Text('Calculate'),
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
