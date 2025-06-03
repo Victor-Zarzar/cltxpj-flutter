@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
 
   String? _validator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Campo obrigatório';
+      return 'required_field'.tr();
     }
     return null;
   }
@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder:
           (_) => AlertDialog(
-            title: const Text('Resultado'),
+            title: Text('result'.tr()),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -127,11 +127,21 @@ class _HomePageState extends State<HomePage> {
                   size: 180,
                 ),
                 const SizedBox(height: 16),
-                Text('CLT Líquido: R\$ ${currencyFormat.format(totalClt)}'),
-                Text('PJ Líquido: R\$ ${currencyFormat.format(totalPj)}'),
+                Text(
+                  'clt_net'.tr(
+                    namedArgs: {'amount': currencyFormat.format(totalClt)},
+                  ),
+                ), // Changed
+                Text(
+                  'pj_net'.tr(
+                    namedArgs: {'amount': currencyFormat.format(totalPj)},
+                  ),
+                ), // Changed
                 const SizedBox(height: 8),
                 Text(
-                  'Diferença: R\$ ${currencyFormat.format(difference)}',
+                  'difference'.tr(
+                    namedArgs: {'amount': currencyFormat.format(difference)},
+                  ), // Changed
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
@@ -144,7 +154,7 @@ class _HomePageState extends State<HomePage> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Fechar'),
+                child: Text('close'.tr()),
               ),
             ],
           ),
@@ -200,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     InputField(
-                      label: 'Salário CLT',
+                      label: 'salary_clt'.tr(),
                       controller: salaryCltController,
                       validator: _validator,
                       icon: Icons.money,
@@ -208,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                       onChanged: (_) => _formatCurrency(salaryCltController),
                     ),
                     InputField(
-                      label: 'Salário PJ',
+                      label: 'salary_pj'.tr(),
                       controller: salaryPjController,
                       validator: _validator,
                       icon: Icons.money,
@@ -216,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                       onChanged: (_) => _formatCurrency(salaryPjController),
                     ),
                     InputField(
-                      label: 'Benefícios CLT',
+                      label: 'benefits_clt'.tr(),
                       controller: benefitsController,
                       validator: _validator,
                       icon: Icons.card_giftcard,
@@ -224,7 +234,7 @@ class _HomePageState extends State<HomePage> {
                       onChanged: (_) => _formatCurrency(benefitsController),
                     ),
                     InputField(
-                      label: 'Taxa do contador (R\$)',
+                      label: 'accountant_fee'.tr(),
                       controller: accountantFeeController,
                       validator: _validator,
                       icon: Icons.receipt,
@@ -234,14 +244,14 @@ class _HomePageState extends State<HomePage> {
                     ),
 
                     InputField(
-                      label: 'INSS PJ (%)',
+                      label: 'inss_pj'.tr(),
                       controller: inssPjController,
                       validator: _validator,
                       icon: Icons.percent,
                       maxWidth: 600,
                     ),
                     InputField(
-                      label: 'Impostos PJ (%)',
+                      label: 'taxes_pj'.tr(),
                       controller: taxesPjController,
                       validator: _validator,
                       icon: Icons.percent,
@@ -274,7 +284,7 @@ class _HomePageState extends State<HomePage> {
                           _showResult();
                         }
                       },
-                      child: const Text('Calcular'),
+                      child: Text('calculate'.tr()),
                     ),
                   ],
                 ),

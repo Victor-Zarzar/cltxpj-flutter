@@ -1,5 +1,6 @@
 import 'package:cltxpj/model/calculate_model.dart';
 import 'package:cltxpj/utils/salary_helper.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../services/storage_service.dart';
 
@@ -32,11 +33,11 @@ class CalculatorController extends ChangeNotifier {
     final diff = (totalClt - totalPj).abs();
 
     if (totalClt > totalPj) {
-      return "CLT é melhor por R\$ ${diff.toStringAsFixed(2)}";
+      return 'clt_better'.tr(namedArgs: {'amount': diff.toStringAsFixed(2)});
     } else if (totalPj > totalClt) {
-      return "PJ é melhor por R\$ ${diff.toStringAsFixed(2)}";
+      return 'pj_better'.tr(namedArgs: {'amount': diff.toStringAsFixed(2)});
     } else {
-      return "Empate perfeito";
+      return 'perfect_tie'.tr();
     }
   }
 
