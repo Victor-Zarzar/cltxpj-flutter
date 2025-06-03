@@ -7,6 +7,7 @@ class InputField extends StatelessWidget {
   final String? Function(String?)? validator;
   final IconData icon;
   final double? maxWidth;
+  final void Function(String)? onChanged;
 
   const InputField({
     super.key,
@@ -15,6 +16,7 @@ class InputField extends StatelessWidget {
     required this.validator,
     required this.icon,
     this.maxWidth,
+    this.onChanged,
   });
 
   @override
@@ -30,6 +32,7 @@ class InputField extends StatelessWidget {
             validator: validator,
             keyboardType: TextInputType.number,
             style: const TextStyle(color: Colors.white),
+            onChanged: onChanged,
             decoration: InputDecoration(
               labelText: label,
               labelStyle: TextStyle(

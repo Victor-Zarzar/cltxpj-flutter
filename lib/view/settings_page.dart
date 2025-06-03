@@ -39,10 +39,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 textStyle: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
-                  color:
-                      notifier.isDark
-                          ? TextColor.secondaryColor
-                          : TextColor.primaryColor,
+                  color: TextColor.primaryColor,
                 ),
               ),
             ),
@@ -78,10 +75,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           textStyle: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
-                            color:
-                                notifier.isDark
-                                    ? TextColor.secondaryColor
-                                    : TextColor.primaryColor,
+                            color: TextColor.primaryColor,
                           ),
                         ),
                       ),
@@ -196,10 +190,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           textStyle: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color:
-                                notifier.isDark
-                                    ? TextColor.secondaryColor
-                                    : TextColor.primaryColor,
+                            color: TextColor.primaryColor,
                           ),
                         ),
                       ),
