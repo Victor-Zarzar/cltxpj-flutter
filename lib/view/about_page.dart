@@ -49,7 +49,7 @@ class _AboutPageState extends State<AboutPage> {
                             : AppBarColor.secondaryColor,
                     title: Text(
                       "about".tr(),
-                      style: GoogleFonts.jetBrainsMono(
+                      style: GoogleFonts.roboto(
                         textStyle: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -64,12 +64,16 @@ class _AboutPageState extends State<AboutPage> {
                     padding: const EdgeInsets.all(10.0),
                     child: Row(
                       children: [
-                        Icon(Icons.info, semanticLabel: 'informationicon'.tr()),
+                        Icon(
+                          Icons.info,
+                          semanticLabel: 'informationicon'.tr(),
+                          color: IconColor.primaryColor,
+                        ),
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
                             "description".tr(),
-                            style: GoogleFonts.jetBrainsMono(
+                            style: GoogleFonts.roboto(
                               textStyle: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
@@ -93,7 +97,7 @@ class _AboutPageState extends State<AboutPage> {
                       child: Text(
                         "developed".tr(),
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.jetBrainsMono(
+                        style: GoogleFonts.roboto(
                           textStyle: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,

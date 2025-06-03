@@ -35,7 +35,7 @@ class _SettingsPageState extends State<SettingsPage> {
             centerTitle: true,
             title: Text(
               'settings'.tr(),
-              style: GoogleFonts.jetBrainsMono(
+              style: GoogleFonts.roboto(
                 textStyle: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
@@ -58,135 +58,152 @@ class _SettingsPageState extends State<SettingsPage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 40),
                     child: ListTile(
-                      trailing: Switch(
-                        activeColor: SwitchColor.primaryColor,
-                        inactiveTrackColor: SwitchColor.secondaryColor,
-                        value: notifier.isDark,
-                        onChanged: (value) => notifier.changeTheme(),
-                      ),
                       leading: Icon(
-                        Icons.dark_mode,
-                        semanticLabel: 'notifications_icon'.tr(),
-                        size: 20,
+                        Icons.translate,
+                        color: IconColor.primaryColor,
                       ),
                       title: Text(
-                        'darkmode'.tr(),
-                        style: GoogleFonts.jetBrainsMono(
+                        'language'.tr(),
+                        style: GoogleFonts.roboto(
                           textStyle: TextStyle(
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: TextColor.primaryColor,
                           ),
                         ),
                       ),
+                      trailing: PopupMenuButton<Locale>(
+                        color:
+                            notifier.isDark
+                                ? PopupMenuColor.fourthColor
+                                : PopupMenuColor.thirdColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        icon: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.language, color: IconColor.primaryColor),
+                            const SizedBox(width: 4),
+                            Text(
+                              'english'.tr(),
+                              style: GoogleFonts.jetBrainsMono(
+                                textStyle: TextStyle(
+                                  color: TextColor.primaryColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_drop_down,
+                              color: IconColor.primaryColor,
+                            ),
+                          ],
+                        ),
+                        onSelected: (Locale locale) {
+                          Provider.of<LocaleController>(
+                            context,
+                            listen: false,
+                          ).changeLanguage(context, locale);
+                        },
+                        itemBuilder:
+                            (BuildContext context) => [
+                              PopupMenuItem(
+                                value: const Locale('en', 'US'),
+                                child: Row(
+                                  children: [
+                                    EN.asset(),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      'english'.tr(),
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                          color: TextColor.primaryColor,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              PopupMenuItem(
+                                value: const Locale('pt', 'BR'),
+                                child: Row(
+                                  children: [
+                                    PTBR.asset(),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      'portuguese'.tr(),
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                          color: TextColor.primaryColor,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              PopupMenuItem(
+                                value: const Locale('es'),
+                                child: Row(
+                                  children: [
+                                    ES.asset(),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      'spanish'.tr(),
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                          color: TextColor.primaryColor,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 5),
                   ListTile(
+                    trailing: Switch(
+                      activeColor: SwitchColor.primaryColor,
+                      inactiveTrackColor: SwitchColor.secondaryColor,
+                      value: notifier.isDark,
+                      onChanged: (value) => notifier.changeTheme(),
+                    ),
                     leading: Icon(
-                      Icons.language,
+                      Icons.dark_mode,
                       color: IconColor.primaryColor,
-                      semanticLabel: 'language_icon'.tr(),
+                      semanticLabel: 'notifications_icon'.tr(),
+                      size: 20,
                     ),
                     title: Text(
-                      'language'.tr(),
+                      'darkmode'.tr(),
                       style: GoogleFonts.roboto(
                         textStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
                           color: TextColor.primaryColor,
                         ),
                       ),
                     ),
-                    trailing: PopupMenuButton<Locale>(
-                      color: AppThemeColor.thirdColor,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        size: 40,
-                        color: TextColor.primaryColor,
-                        semanticLabel: 'arrow_icon'.tr(),
-                      ),
-                      onSelected: (Locale locale) {
-                        Provider.of<LocaleController>(
-                          context,
-                          listen: false,
-                        ).changeLanguage(context, locale);
-                      },
-                      itemBuilder:
-                          (BuildContext context) => [
-                            PopupMenuItem(
-                              value: const Locale('en', 'US'),
-                              child: Row(
-                                children: [
-                                  EN.asset(),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    'english'.tr(),
-                                    style: GoogleFonts.roboto(
-                                      textStyle: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.normal,
-                                        color: TextColor.primaryColor,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            PopupMenuItem(
-                              value: const Locale('pt', 'BR'),
-                              child: Row(
-                                children: [
-                                  PTBR.asset(),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    'portuguese'.tr(),
-                                    style: GoogleFonts.roboto(
-                                      textStyle: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.normal,
-                                        color: TextColor.primaryColor,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            PopupMenuItem(
-                              value: const Locale('es'),
-                              child: Row(
-                                children: [
-                                  ES.asset(),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    'spanish'.tr(),
-                                    style: GoogleFonts.roboto(
-                                      textStyle: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.normal,
-                                        color: TextColor.primaryColor,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                    ),
                   ),
+                  const SizedBox(height: 5),
                   if (!kIsWeb)
                     ListTile(
                       leading: Icon(
+                        color: IconColor.primaryColor,
                         Icons.notification_important,
                         semanticLabel: 'about_icon'.tr(),
                         size: 20,
                       ),
                       title: Text(
                         'notifications'.tr(),
-                        style: GoogleFonts.jetBrainsMono(
+                        style: GoogleFonts.roboto(
                           textStyle: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,

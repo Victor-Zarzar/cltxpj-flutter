@@ -31,20 +31,20 @@ class InputField extends StatelessWidget {
             controller: controller,
             validator: validator,
             keyboardType: TextInputType.number,
-            style: const TextStyle(color: Colors.white),
+            style: TextStyle(color: TextColor.primaryColor),
             onChanged: onChanged,
             decoration: InputDecoration(
               labelText: label,
               labelStyle: TextStyle(
-                color: Colors.white.withValues(alpha: 0.7),
+                color: TextColor.primaryColor.withValues(alpha: 0.7),
                 fontWeight: FontWeight.w500,
               ),
               prefixIcon: Icon(
                 icon,
-                color: Colors.white.withValues(alpha: 0.8),
+                color: IconColor.primaryColor.withValues(alpha: 0.8),
               ),
               filled: true,
-              fillColor: Colors.white.withValues(alpha: 0.05),
+              fillColor: IconColor.primaryColor.withValues(alpha: 0.05),
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 20,

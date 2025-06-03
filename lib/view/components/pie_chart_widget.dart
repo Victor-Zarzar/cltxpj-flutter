@@ -1,3 +1,4 @@
+import 'package:cltxpj/features/app_theme.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,7 @@ class PieChartWidget extends StatelessWidget {
             titleStyle: TextStyle(
               fontSize: size / 9,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: TextColor.primaryColor,
             ),
             radius: size / 2.6,
           );
