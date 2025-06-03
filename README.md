@@ -43,3 +43,15 @@ Run the app:
     flutter run
 
 ### Archictecture:
+
+<img src="assets/imgs/architecture.png" alt="architecture" width="1000" height="800">
+
+### Version iOS:
+
+<img src="assets/imgs/homepageios.png" alt="intro page ios" width="250"> &nbsp; &nbsp; &nbsp; <img src="assets/imgs/resultpageios.png" alt="resultpageios" width="250"> &nbsp; &nbsp; &nbsp; <img src="assets/imgs/aboutpageios.png" alt="aboutpageios" width="250">
+
+
+### Version Android:
+
+<img src="assets/imgs/homepageandroid.png" alt="home page android" width="250"> &nbsp; &nbsp; &nbsp; <img src="assets/imgs/resultpageandroid.png" alt="resultpageandroid" width="250"> &nbsp; &nbsp; &nbsp; <img src="assets/imgs/aboutpageandroid.png" alt="aboutpageandroid" width="250">
+
