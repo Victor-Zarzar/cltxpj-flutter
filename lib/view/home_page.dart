@@ -9,7 +9,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,13 +23,14 @@ class _HomePageState extends State<HomePage> {
   final salaryPjController = TextEditingController();
   final benefitsController = TextEditingController();
   final taxesPjController = TextEditingController();
+  final accountantFeeController = TextEditingController();
+  final inssPjController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  final regex = RegExp(r'^\d*\.?\d*$');
 
   final currencyFormat = NumberFormat.currency(
     locale: 'pt_BR',
-    symbol: 'R\$',
+    symbol: '',
     decimalDigits: 2,
   );
 
@@ -39,9 +39,16 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     final controller = context.read<CalculatorController>();
     controller.loadData().then((_) {
-      salaryCltController.text = controller.model.salaryClt.toString();
-      salaryPjController.text = controller.model.salaryPj.toString();
-      benefitsController.text = controller.model.benefits.toString();
+      salaryCltController.text = formatNumber(controller.model.salaryClt);
+      salaryPjController.text = formatNumber(controller.model.salaryPj);
+      benefitsController.text = formatNumber(controller.model.benefits);
+      accountantFeeController.text = formatNumber(
+        controller.model.accountantFee,
+      );
+      inssPjController.text = (controller.model.inssPj * 100).toStringAsFixed(
+        2,
+      );
+
       taxesPjController.text = controller.model.taxesPj.toString();
     });
   }
@@ -52,19 +59,43 @@ class _HomePageState extends State<HomePage> {
     salaryPjController.dispose();
     benefitsController.dispose();
     taxesPjController.dispose();
+    accountantFeeController.dispose();
+    inssPjController.dispose();
+
     super.dispose();
+  }
+
+  void _formatCurrency(TextEditingController controller) {
+    String text = controller.text.replaceAll('.', '').replaceAll(',', '');
+    if (text.isEmpty) return;
+
+    double value = double.parse(text) / 100;
+    controller.value = TextEditingValue(
+      text: currencyFormat.format(value),
+      selection: TextSelection.collapsed(
+        offset: currencyFormat.format(value).length,
+      ),
+    );
+  }
+
+  String formatNumber(double number) {
+    return currencyFormat.format(number);
+  }
+
+  double parseCurrency(String value) {
+    return double.tryParse(
+          value
+              .replaceAll('.', '')
+              .replaceAll(',', '.')
+              .replaceAll(' ', '')
+              .trim(),
+        ) ??
+        0.0;
   }
 
   String? _validator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Required field';
-    }
-    final parsedValue = double.tryParse(value.replaceAll(',', '.'));
-    if (parsedValue == null) {
-      return 'Only valid numbers';
-    }
-    if (parsedValue <= 0) {
-      return 'Value must be greater than zero';
+      return 'required_field'.tr();
     }
     return null;
   }
@@ -86,7 +117,7 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder:
           (_) => AlertDialog(
-            title: const Text('Resultado'),
+            title: Text('result'.tr()),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -96,11 +127,21 @@ class _HomePageState extends State<HomePage> {
                   size: 180,
                 ),
                 const SizedBox(height: 16),
-                Text('💼 CLT Líquido: ${currencyFormat.format(totalClt)}'),
-                Text('🧑‍💻 PJ Líquido: ${currencyFormat.format(totalPj)}'),
+                Text(
+                  'clt_net'.tr(
+                    namedArgs: {'amount': currencyFormat.format(totalClt)},
+                  ),
+                ), // Changed
+                Text(
+                  'pj_net'.tr(
+                    namedArgs: {'amount': currencyFormat.format(totalPj)},
+                  ),
+                ), // Changed
                 const SizedBox(height: 8),
                 Text(
-                  'Diferença: ${currencyFormat.format(difference)}',
+                  'difference'.tr(
+                    namedArgs: {'amount': currencyFormat.format(difference)},
+                  ), // Changed
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
@@ -113,7 +154,7 @@ class _HomePageState extends State<HomePage> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Fechar'),
+                child: Text('close'.tr()),
               ),
             ],
           ),
@@ -159,7 +200,7 @@ class _HomePageState extends State<HomePage> {
             child: SingleChildScrollView(
               padding: EdgeInsets.fromLTRB(
                 padding,
-                padding + 90,
+                padding + 60,
                 padding,
                 padding,
               ),
@@ -169,31 +210,51 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     InputField(
-                      label: 'CLT Salary',
+                      label: 'salary_clt'.tr(),
                       controller: salaryCltController,
                       validator: _validator,
                       icon: Icons.money,
                       maxWidth: 600,
+                      onChanged: (_) => _formatCurrency(salaryCltController),
                     ),
                     InputField(
-                      label: 'PJ Salary',
+                      label: 'salary_pj'.tr(),
                       controller: salaryPjController,
                       validator: _validator,
                       icon: Icons.money,
                       maxWidth: 600,
+                      onChanged: (_) => _formatCurrency(salaryPjController),
                     ),
                     InputField(
-                      label: 'CLT Benefits',
+                      label: 'benefits_clt'.tr(),
                       controller: benefitsController,
                       validator: _validator,
-                      icon: Icons.portable_wifi_off_sharp,
+                      icon: Icons.card_giftcard,
+                      maxWidth: 600,
+                      onChanged: (_) => _formatCurrency(benefitsController),
+                    ),
+                    InputField(
+                      label: 'accountant_fee'.tr(),
+                      controller: accountantFeeController,
+                      validator: _validator,
+                      icon: Icons.receipt,
+                      maxWidth: 600,
+                      onChanged:
+                          (_) => _formatCurrency(accountantFeeController),
+                    ),
+
+                    InputField(
+                      label: 'inss_pj'.tr(),
+                      controller: inssPjController,
+                      validator: _validator,
+                      icon: Icons.percent,
                       maxWidth: 600,
                     ),
                     InputField(
-                      label: 'PJ Taxes (%)',
+                      label: 'taxes_pj'.tr(),
                       controller: taxesPjController,
                       validator: _validator,
-                      icon: Icons.transcribe_outlined,
+                      icon: Icons.percent,
                       maxWidth: 600,
                     ),
                     const SizedBox(height: 20),
@@ -202,27 +263,28 @@ class _HomePageState extends State<HomePage> {
                           notifier.isDark
                               ? ButtonColor.fourthColor
                               : ButtonColor.primaryColor,
-
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           controller.updateValues(
-                            salaryClt: double.parse(
-                              salaryCltController.text.replaceAll(',', '.'),
-                            ),
-                            salaryPj: double.parse(
-                              salaryPjController.text.replaceAll(',', '.'),
-                            ),
-                            benefits: double.parse(
-                              benefitsController.text.replaceAll(',', '.'),
-                            ),
+                            salaryClt: parseCurrency(salaryCltController.text),
+                            salaryPj: parseCurrency(salaryPjController.text),
+                            benefits: parseCurrency(benefitsController.text),
                             taxesPj: double.parse(
                               taxesPjController.text.replaceAll(',', '.'),
                             ),
+                            accountantFee: parseCurrency(
+                              accountantFeeController.text,
+                            ),
+                            inssPj:
+                                double.parse(
+                                  inssPjController.text.replaceAll(',', '.'),
+                                ) /
+                                100,
                           );
                           _showResult();
                         }
                       },
-                      child: const Text('Calculate'),
+                      child: Text('calculate'.tr()),
                     ),
                   ],
                 ),

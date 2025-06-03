@@ -8,6 +8,8 @@ class StorageService {
     prefs.setDouble('salaryPj', model.salaryPj);
     prefs.setDouble('benefits', model.benefits);
     prefs.setDouble('taxesPj', model.taxesPj);
+    prefs.setDouble('accountantFee', model.accountantFee);
+    prefs.setDouble('inssPj', model.inssPj);
   }
 
   static Future<CalculatorModel> loadData() async {
@@ -17,6 +19,8 @@ class StorageService {
       salaryPj: prefs.getDouble('salaryPj') ?? 0,
       benefits: prefs.getDouble('benefits') ?? 0,
       taxesPj: prefs.getDouble('taxesPj') ?? 0,
+      accountantFee: prefs.getDouble('accountantFee') ?? 189.0,
+      inssPj: prefs.getDouble('inssPj') ?? 0.11,
     );
   }
 }

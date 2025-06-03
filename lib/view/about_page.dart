@@ -41,6 +41,7 @@ class _AboutPageState extends State<AboutPage> {
                 SizedBox(
                   width: myWidth,
                   child: GFAppBar(
+                    automaticallyImplyLeading: false,
                     centerTitle: true,
                     backgroundColor:
                         notifier.isDark
@@ -52,25 +53,9 @@ class _AboutPageState extends State<AboutPage> {
                         textStyle: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color:
-                              notifier.isDark
-                                  ? TextColor.secondaryColor
-                                  : TextColor.primaryColor,
+                          color: TextColor.primaryColor,
                         ),
                       ),
-                    ),
-                    leading: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color:
-                            notifier.isDark
-                                ? TextColor.secondaryColor
-                                : TextColor.primaryColor,
-                        semanticLabel: 'backtopage'.tr(),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
                     ),
                   ),
                 ),
@@ -88,10 +73,7 @@ class _AboutPageState extends State<AboutPage> {
                               textStyle: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
-                                color:
-                                    notifier.isDark
-                                        ? TextColor.secondaryColor
-                                        : TextColor.primaryColor,
+                                color: TextColor.primaryColor,
                               ),
                             ),
                           ),
@@ -115,10 +97,7 @@ class _AboutPageState extends State<AboutPage> {
                           textStyle: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
-                            color:
-                                notifier.isDark
-                                    ? TextColor.secondaryColor
-                                    : TextColor.primaryColor,
+                            color: TextColor.primaryColor,
                           ),
                         ),
                       ),

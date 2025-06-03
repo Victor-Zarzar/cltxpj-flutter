@@ -70,7 +70,7 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
               Tab(
                 icon: Icon(
                   Icons.money,
-                  size: 23,
+                  size: 21,
                   color: IconColor.primaryColor,
                 ),
                 child: Text(
@@ -79,7 +79,7 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
                 ),
               ),
               Tab(
-                icon: Icon(Icons.info, size: 23, color: IconColor.primaryColor),
+                icon: Icon(Icons.info, size: 21, color: IconColor.primaryColor),
                 child: Text(
                   'about'.tr(),
                   style: GoogleFonts.roboto(color: TextColor.primaryColor),
@@ -88,7 +88,7 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
               Tab(
                 icon: Icon(
                   Icons.settings,
-                  size: 23,
+                  size: 21,
                   color: IconColor.primaryColor,
                 ),
                 child: Text(
