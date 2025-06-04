@@ -33,5 +33,7 @@
   "notifications_icon": "Ícono de notificaciones",
   "language_icon": "Ícono de idioma",
   "arrow_icon": "Ícono de flecha",
-  "about_icon": "Ícono acerca de"
+  "about_icon": "Ícono acerca de",
+  "title_notification": "¿Te gusta nuestra aplicación?",
+  "body_notification": "¡Califícanos en la tienda!"
 }

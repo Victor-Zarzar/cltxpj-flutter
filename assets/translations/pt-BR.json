@@ -33,5 +33,7 @@
   "notifications_icon": "Ícone de notificações",
   "language_icon": "Ícone de idioma",
   "arrow_icon": "Ícone de seta",
-  "about_icon": "Ícone sobre"
+  "about_icon": "Ícone sobre",
+  "title_notification": "Está gostando do nosso app?",
+  "body_notification": "Nos avalie na loja!"
 }

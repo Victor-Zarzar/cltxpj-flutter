@@ -33,5 +33,7 @@
   "notifications_icon": "Notifications icon",
   "language_icon": "Language icon",
   "arrow_icon": "Arrow icon",
-  "about_icon": "About icon"
+  "about_icon": "About icon",
+  "title_notification": "Do you like our app?",
+  "body_notification": "Rate us in the store!"
 }

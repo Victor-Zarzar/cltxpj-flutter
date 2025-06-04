@@ -54,3 +54,6 @@ Run the app:
 
 <img src="assets/imgs/homepageandroid.png" alt="home page android" width="250"> &nbsp; &nbsp; &nbsp; <img src="assets/imgs/resultpageandroid.png" alt="resultpageandroid" width="250"> &nbsp; &nbsp; &nbsp; <img src="assets/imgs/aboutpageandroid.png" alt="aboutpageandroid" width="250">
 
+### Version Web:
+
+<img src="assets/imgs/homepageweb.png" alt="home page web" width="800">

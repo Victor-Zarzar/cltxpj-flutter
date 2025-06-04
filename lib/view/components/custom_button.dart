@@ -17,7 +17,7 @@ class CustomButton extends StatelessWidget {
     required this.color,
     this.maxWidth,
     this.minWidth,
-    this.height = 50,
+    this.height = 30,
     this.fullWidth = false,
   });
 
@@ -32,6 +32,10 @@ class CustomButton extends StatelessWidget {
       child: Text(text),
     );
 
+    if (fullWidth) {
+      return SizedBox(height: height, width: double.infinity, child: button);
+    }
+
     return Center(
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -39,7 +43,11 @@ class CustomButton extends StatelessWidget {
           minWidth: minWidth ?? 0,
           minHeight: height ?? 0,
         ),
-        child: button,
+        child: SizedBox(
+          width: maxWidth, // Esse é o segredo para web
+          height: height,
+          child: button,
+        ),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:cltxpj/controller/calculate_controller.dart';
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
 import 'package:cltxpj/utils/chart_data_hepler.dart';
+import 'package:cltxpj/view/components/custom_button.dart';
 import 'package:cltxpj/view/components/input_field.dart';
 import 'package:cltxpj/view/components/pie_chart_widget.dart';
 import 'package:cltxpj/view/widgets/responsive_scaffold.dart';
@@ -315,7 +316,8 @@ class _HomePageState extends State<HomePage> {
                       maxWidth: 600,
                     ),
                     const SizedBox(height: 20),
-                    GFButton(
+                    CustomButton(
+                      maxWidth: 600,
                       color:
                           notifier.isDark
                               ? ButtonColor.fourthColor
@@ -341,7 +343,7 @@ class _HomePageState extends State<HomePage> {
                           _showResult();
                         }
                       },
-                      child: Text('calculate'.tr()),
+                      text: 'calculate'.tr(),
                     ),
                   ],
                 ),
