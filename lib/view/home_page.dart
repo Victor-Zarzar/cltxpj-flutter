@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _formatCurrency(TextEditingController controller) {
-    String text = controller.text.replaceAll('.', '').replaceAll(',', '');
+    String text = controller.text.replaceAll(RegExp(r'[^0-9]'), '');
     if (text.isEmpty) return;
 
     double value = double.parse(text) / 100;
@@ -83,14 +83,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   double parseCurrency(String value) {
-    return double.tryParse(
-          value
-              .replaceAll('.', '')
-              .replaceAll(',', '.')
-              .replaceAll(' ', '')
-              .trim(),
-        ) ??
-        0.0;
+    String cleaned = value.replaceAll(RegExp(r'[^0-9]'), '');
+    if (cleaned.isEmpty) return 0.0;
+
+    return double.parse(cleaned) / 100;
   }
 
   String? _validator(String? value) {
@@ -111,52 +107,73 @@ class _HomePageState extends State<HomePage> {
       pjNet: totalPj,
     );
 
-    final colorList = [Colors.blue, Colors.green];
+    final colorList = [
+      PieChartColor.primaryColor,
+      PieChartColor.secondaryColor,
+    ];
 
     showDialog(
       context: context,
       builder:
-          (_) => AlertDialog(
-            title: Text('result'.tr()),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                PieChartWidget(
-                  dataMap: chartData,
-                  colorList: colorList,
-                  size: 180,
+          (_) => Consumer<UiProvider>(
+            builder: (context, notifier, child) {
+              return AlertDialog(
+                title: Text('result'.tr()),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    PieChartWidget(
+                      dataMap: chartData,
+                      colorList: colorList,
+                      size: 180,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'clt_net'.tr(
+                        namedArgs: {'amount': currencyFormat.format(totalClt)},
+                      ),
+                    ), // Changed
+                    Text(
+                      'pj_net'.tr(
+                        namedArgs: {'amount': currencyFormat.format(totalPj)},
+                      ),
+                    ), // Changed
+                    const SizedBox(height: 8),
+                    Text(
+                      'difference'.tr(
+                        namedArgs: {
+                          'amount': currencyFormat.format(difference),
+                        },
+                      ), // Changed
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      controller.bestOption,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 16),
-                Text(
-                  'clt_net'.tr(
-                    namedArgs: {'amount': currencyFormat.format(totalClt)},
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(
+                      'close'.tr(),
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color:
+                              notifier.isDark
+                                  ? TextColor.primaryColor
+                                  : TextColor.fourthColor,
+                        ),
+                      ),
+                    ),
                   ),
-                ), // Changed
-                Text(
-                  'pj_net'.tr(
-                    namedArgs: {'amount': currencyFormat.format(totalPj)},
-                  ),
-                ), // Changed
-                const SizedBox(height: 8),
-                Text(
-                  'difference'.tr(
-                    namedArgs: {'amount': currencyFormat.format(difference)},
-                  ), // Changed
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  controller.bestOption,
-                  style: const TextStyle(fontSize: 16),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text('close'.tr()),
-              ),
-            ],
+                ],
+              );
+            },
           ),
     );
   }
@@ -215,6 +232,16 @@ class _HomePageState extends State<HomePage> {
                       validator: _validator,
                       icon: Icons.money,
                       maxWidth: 600,
+                      prefix: Text(
+                        'R\$ ',
+                        style: GoogleFonts.roboto(
+                          textStyle: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: TextColor.primaryColor,
+                          ),
+                        ),
+                      ),
                       onChanged: (_) => _formatCurrency(salaryCltController),
                     ),
                     InputField(
@@ -223,6 +250,16 @@ class _HomePageState extends State<HomePage> {
                       validator: _validator,
                       icon: Icons.money,
                       maxWidth: 600,
+                      prefix: Text(
+                        'R\$ ',
+                        style: GoogleFonts.roboto(
+                          textStyle: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: TextColor.primaryColor,
+                          ),
+                        ),
+                      ),
                       onChanged: (_) => _formatCurrency(salaryPjController),
                     ),
                     InputField(
@@ -231,6 +268,16 @@ class _HomePageState extends State<HomePage> {
                       validator: _validator,
                       icon: Icons.card_giftcard,
                       maxWidth: 600,
+                      prefix: Text(
+                        'R\$ ',
+                        style: GoogleFonts.roboto(
+                          textStyle: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: TextColor.primaryColor,
+                          ),
+                        ),
+                      ),
                       onChanged: (_) => _formatCurrency(benefitsController),
                     ),
                     InputField(
@@ -239,6 +286,16 @@ class _HomePageState extends State<HomePage> {
                       validator: _validator,
                       icon: Icons.receipt,
                       maxWidth: 600,
+                      prefix: Text(
+                        'R\$ ',
+                        style: GoogleFonts.roboto(
+                          textStyle: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: TextColor.primaryColor,
+                          ),
+                        ),
+                      ),
                       onChanged:
                           (_) => _formatCurrency(accountantFeeController),
                     ),

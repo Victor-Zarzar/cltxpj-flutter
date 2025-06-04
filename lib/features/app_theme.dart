@@ -30,7 +30,7 @@ class TextColor {
   static Color get primaryColor => const Color(0xFFF1F8E9);
   static Color get secondaryColor => const Color(0xFF1B5E20);
   static Color get thirdColor => const Color(0xFFE0E0E0);
-  static Color get fourthColor => const Color(0xFFFFFFFF);
+  static Color get fourthColor => const Color(0xFF000000);
 }
 
 class DropDownColor {
@@ -107,4 +107,16 @@ class PopupMenuColor {
   static Color get fourthColor => const Color(0xFF000000);
   static const Color darkActiveColor = Color(0xFF4CAF50);
   static const Color darkInactiveTrackColor = Color(0xFF424242);
+}
+
+class BorderColor {
+  BorderColor._();
+  static Color get primaryColor => const Color(0xFFF1F8E9);
+  static Color get secondaryColor => const Color(0xFF4CAF50);
+}
+
+class PieChartColor {
+  PieChartColor._();
+  static Color get primaryColor => const Color(0xFF0277BD);
+  static Color get secondaryColor => const Color(0xFF4CAF50);
 }

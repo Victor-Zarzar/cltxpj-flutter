@@ -4,6 +4,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../services/storage_service.dart';
 
+final currencyFormat = NumberFormat.currency(
+  locale: 'pt_BR',
+  symbol: '',
+  decimalDigits: 2,
+);
+
 class CalculatorController extends ChangeNotifier {
   CalculatorModel model = CalculatorModel(
     salaryClt: 0,
@@ -31,11 +37,16 @@ class CalculatorController extends ChangeNotifier {
 
   String get bestOption {
     final diff = (totalClt - totalPj).abs();
+    final amountFormatted = NumberFormat.currency(
+      locale: 'pt_BR',
+      symbol: 'R\$',
+      decimalDigits: 2,
+    ).format(diff);
 
     if (totalClt > totalPj) {
-      return 'clt_better'.tr(namedArgs: {'amount': diff.toStringAsFixed(2)});
+      return 'clt_better'.tr(namedArgs: {'amount': amountFormatted});
     } else if (totalPj > totalClt) {
-      return 'pj_better'.tr(namedArgs: {'amount': diff.toStringAsFixed(2)});
+      return 'pj_better'.tr(namedArgs: {'amount': amountFormatted});
     } else {
       return 'perfect_tie'.tr();
     }

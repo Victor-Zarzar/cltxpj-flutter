@@ -9,14 +9,13 @@
 - Get Widget UI
 - Google Fonts
 - Locale Language EN / PT-BR / ES
+- Dark Mode Provider
 - Flutter local notifications
 - Url Launcher
 - Timezone
 - Provider (State Managment)
 - Flutter Secure Storage
-- DontEnv
 - PierChart
-- Docker (Version WEB)
 
 <br />
 
