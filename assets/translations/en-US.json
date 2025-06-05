@@ -35,5 +35,10 @@
   "arrow_icon": "Arrow icon",
   "about_icon": "About icon",
   "title_notification": "Do you like our app?",
-  "body_notification": "Rate us in the store!"
+  "body_notification": "Rate us in the store!",
+  "theme": "Theme",
+  "select_theme": "Select theme",
+  "light_theme": "Light",
+  "dark_theme": "Dark",
+  "system_theme": "System"
 }

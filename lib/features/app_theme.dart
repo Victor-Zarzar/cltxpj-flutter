@@ -87,16 +87,19 @@ class IconColor {
   static Color get secondaryColor => const Color(0xFF4CAF50);
   static Color get thirdColor => const Color(0xFF81C784);
   static Color get fourthColor => const Color(0xFFFFFFFF);
+  static Color get fiveColor => const Color(0xFF000000);
 }
 
 class SwitchColor {
   SwitchColor._();
-  static Color get primaryColor => const Color(0xFFECEFF1);
-  static Color get secondaryColor => const Color(0xFFFFFFFF);
-  static Color get thirdColor => const Color(0xFF4CAF50);
-  static Color get fourthColor => const Color(0xFF000000);
-  static const Color darkActiveColor = Color(0xFF4CAF50);
-  static const Color darkInactiveTrackColor = Color(0xFF424242);
+  static const Color activeThumb = Color(0xFF4CAF50);
+  static const Color inactiveThumb = Color(0xFFECEFF1);
+  static const Color lightActiveTrack = Color(0xFF81C784);
+  static const Color lightInactiveTrack = Color(0xFFFFFFFF);
+  static const Color darkActiveTrack = Color(0xFF4CAF50);
+  static const Color darkInactiveTrack = Color(0xFF424242);
+  static Color get fourthColor => const Color(0xFFFFFFFF);
+  static Color get fiveColor => const Color(0xFF000000);
 }
 
 class PopupMenuColor {

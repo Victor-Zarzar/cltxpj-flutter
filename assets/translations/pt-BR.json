@@ -35,5 +35,10 @@
   "arrow_icon": "Ícone de seta",
   "about_icon": "Ícone sobre",
   "title_notification": "Está gostando do nosso app?",
-  "body_notification": "Nos avalie na loja!"
+  "body_notification": "Nos avalie na loja!",
+  "theme": "Tema",
+  "select_theme": "Selecionar tema",
+  "light_theme": "Claro",
+  "dark_theme": "Escuro",
+  "system_theme": "Sistema"
 }

@@ -3,6 +3,7 @@ import 'package:cltxpj/controller/notification_controller.dart';
 import 'package:cltxpj/features/app_assets.dart';
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
+import 'package:cltxpj/view/theme_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -169,20 +170,12 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   const SizedBox(height: 5),
                   ListTile(
-                    trailing: Switch(
-                      activeColor: SwitchColor.primaryColor,
-                      inactiveTrackColor: SwitchColor.secondaryColor,
-                      value: notifier.isDark,
-                      onChanged: (value) => notifier.changeTheme(),
-                    ),
                     leading: Icon(
-                      Icons.dark_mode,
+                      Icons.color_lens,
                       color: IconColor.primaryColor,
-                      semanticLabel: 'notifications_icon'.tr(),
-                      size: 20,
                     ),
                     title: Text(
-                      'darkmode'.tr(),
+                      'theme'.tr(),
                       style: GoogleFonts.roboto(
                         textStyle: TextStyle(
                           fontSize: 14,
@@ -191,6 +184,17 @@ class _SettingsPageState extends State<SettingsPage> {
                         ),
                       ),
                     ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 16,
+                      color: IconColor.primaryColor,
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const ThemePage()),
+                      );
+                    },
                   ),
                   const SizedBox(height: 5),
                   if (!kIsWeb)
@@ -214,14 +218,21 @@ class _SettingsPageState extends State<SettingsPage> {
                       trailing: Switch(
                         value: notificationController.notificationsEnabled,
                         onChanged: notificationController.toggleNotifications,
-                        activeColor:
+                        activeColor: SwitchColor.inactiveThumb,
+                        inactiveThumbColor:
                             notifier.isDark
-                                ? SwitchColor.darkActiveColor
-                                : SwitchColor.thirdColor,
+                                ? SwitchColor.fiveColor
+                                : SwitchColor.fourthColor,
+                        activeTrackColor:
+                            notifier.isDark
+                                ? SwitchColor.darkInactiveTrack
+                                : SwitchColor.activeThumb.withValues(
+                                  alpha: 0.5,
+                                ),
                         inactiveTrackColor:
                             notifier.isDark
-                                ? SwitchColor.darkInactiveTrackColor
-                                : SwitchColor.secondaryColor,
+                                ? SwitchColor.inactiveThumb
+                                : SwitchColor.activeThumb,
                       ),
                     ),
                 ],

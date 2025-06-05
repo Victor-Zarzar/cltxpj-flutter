@@ -35,5 +35,10 @@
   "arrow_icon": "Ícono de flecha",
   "about_icon": "Ícono acerca de",
   "title_notification": "¿Te gusta nuestra aplicación?",
-  "body_notification": "¡Califícanos en la tienda!"
+  "body_notification": "¡Califícanos en la tienda!",
+  "theme": "Tema",
+  "select_theme": "Seleccionar tema",
+  "light_theme": "Claro",
+  "dark_theme": "Oscuro",
+  "system_theme": "Sistema"
 }
