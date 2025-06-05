@@ -40,5 +40,6 @@
   "select_theme": "Seleccionar tema",
   "light_theme": "Claro",
   "dark_theme": "Oscuro",
-  "system_theme": "Sistema"
+  "system_theme": "Sistema",
+  "no_data_display": "No hay datos para mostrar"
 }

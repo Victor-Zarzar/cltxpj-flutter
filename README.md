@@ -41,6 +41,11 @@ Run the app:
 
     flutter run
 
+Run the app version Web:
+
+    flutter run -d chrome    
+    
+
 ### Archictecture:
 
 <img src="assets/imgs/architecture.png" alt="architecture" width="1000" height="800">

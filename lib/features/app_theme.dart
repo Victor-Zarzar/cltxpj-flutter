@@ -105,11 +105,9 @@ class SwitchColor {
 class PopupMenuColor {
   PopupMenuColor._();
   static Color get primaryColor => const Color(0xFFECEFF1);
-  static Color get secondaryColor => const Color(0xFFFFFFFF);
+  static Color get secondaryColor => const Color(0xFF212121);
   static Color get thirdColor => const Color(0xFF4CAF50);
   static Color get fourthColor => const Color(0xFF000000);
-  static const Color darkActiveColor = Color(0xFF4CAF50);
-  static const Color darkInactiveTrackColor = Color(0xFF424242);
 }
 
 class BorderColor {
