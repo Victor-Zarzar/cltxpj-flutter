@@ -43,11 +43,7 @@ class CustomButton extends StatelessWidget {
           minWidth: minWidth ?? 0,
           minHeight: height ?? 0,
         ),
-        child: SizedBox(
-          width: maxWidth, // Esse é o segredo para web
-          height: height,
-          child: button,
-        ),
+        child: SizedBox(width: maxWidth, height: height, child: button),
       ),
     );
   }

@@ -1,9 +1,9 @@
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
+import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class PieChartWidget extends StatelessWidget {
@@ -20,22 +20,9 @@ class PieChartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notifier = context.watch<UiProvider>();
     if (dataMap.isEmpty) {
       return Center(
-        child: Text(
-          "no_data_display".tr(),
-          style: GoogleFonts.roboto(
-            textStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color:
-                  notifier.isDark
-                      ? TextColor.primaryColor
-                      : TextColor.fourthColor,
-            ),
-          ),
-        ),
+        child: Text("no_data_display".tr(), style: context.bodySmallBold),
       );
     }
 
@@ -108,19 +95,7 @@ class Indicator extends StatelessWidget {
               decoration: BoxDecoration(shape: BoxShape.circle, color: color),
             ),
             const SizedBox(width: 6),
-            Text(
-              text,
-              style: GoogleFonts.roboto(
-                textStyle: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color:
-                      notifier.isDark
-                          ? TextColor.primaryColor
-                          : TextColor.fourthColor,
-                ),
-              ),
-            ),
+            Text(text, style: context.bodySmallBold),
           ],
         );
       },

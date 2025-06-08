@@ -41,5 +41,13 @@
   "light_theme": "Light",
   "dark_theme": "Dark",
   "system_theme": "System",
-  "no_data_display": "No data to display"
+  "no_data_display": "No data to display",
+  "money_icon": "Money Icon",
+  "info_icon": "Info Icon",
+  "settings_icon": "Settings Icon",
+  "translate_icon": "Translate Icon",
+  "arrow_drop_icon": "Arrow Drop Icon",
+  "color_icon": "Color Icon",
+  "arrow_forward_icon": "Arrow Forward Icon",
+  "radio_icon": "Radio Icon"
 }

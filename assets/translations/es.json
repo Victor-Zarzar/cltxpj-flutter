@@ -41,5 +41,13 @@
   "light_theme": "Claro",
   "dark_theme": "Oscuro",
   "system_theme": "Sistema",
-  "no_data_display": "No hay datos para mostrar"
+  "no_data_display": "No hay datos para mostrar",
+  "money_icon": "Icono de dinero",
+  "info_icon": "Icono de información",
+  "settings_icon": "Icono de ajustes",
+  "translate_icon": "Icono de traducción",
+  "arrow_drop_icon": "Icono de flecha desplegable",
+  "color_icon": "Icono de color",
+  "arrow_forward_icon": "Icono de flecha hacia adelante",
+  "radio_icon": "Icono de radio"
 }

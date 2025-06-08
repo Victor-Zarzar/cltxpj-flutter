@@ -1,5 +1,6 @@
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
+import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +47,7 @@ class InputField extends StatelessWidget {
                 validator: validator,
                 keyboardType: keyboardType,
                 obscureText: obscureText,
-                style: TextStyle(color: TextColor.primaryColor),
+                style: context.bodySmallBold,
                 onChanged: onChanged,
                 decoration: InputDecoration(
                   labelText: label,

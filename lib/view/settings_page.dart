@@ -4,6 +4,7 @@ import 'package:cltxpj/features/app_assets.dart';
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
 import 'package:cltxpj/view/theme_page.dart';
+import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,16 +35,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     : AppBarColor.secondaryColor,
             automaticallyImplyLeading: false,
             centerTitle: true,
-            title: Text(
-              'settings'.tr(),
-              style: GoogleFonts.roboto(
-                textStyle: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: TextColor.primaryColor,
-                ),
-              ),
-            ),
+            title: Text('settings'.tr(), style: context.h1),
           ),
           body: Container(
             color:
@@ -62,16 +54,11 @@ class _SettingsPageState extends State<SettingsPage> {
                       leading: Icon(
                         Icons.translate,
                         color: IconColor.primaryColor,
+                        semanticLabel: "translate_icon".tr(),
                       ),
                       title: Text(
                         'language'.tr(),
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: TextColor.primaryColor,
-                          ),
-                        ),
+                        style: context.bodyMediumFont,
                       ),
                       trailing: PopupMenuButton<Locale>(
                         color:
@@ -84,21 +71,17 @@ class _SettingsPageState extends State<SettingsPage> {
                         icon: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.language, color: IconColor.primaryColor),
-                            const SizedBox(width: 4),
-                            Text(
-                              'english'.tr(),
-                              style: GoogleFonts.jetBrainsMono(
-                                textStyle: TextStyle(
-                                  color: TextColor.primaryColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                            Icon(
+                              Icons.language,
+                              color: IconColor.primaryColor,
+                              semanticLabel: "language_icon".tr(),
                             ),
+                            const SizedBox(width: 4),
+                            Text('english'.tr(), style: context.bodyMediumFont),
                             Icon(
                               Icons.arrow_drop_down,
                               color: IconColor.primaryColor,
+                              semanticLabel: "arrow_drop_icon".tr(),
                             ),
                           ],
                         ),
@@ -173,21 +156,14 @@ class _SettingsPageState extends State<SettingsPage> {
                     leading: Icon(
                       Icons.color_lens,
                       color: IconColor.primaryColor,
+                      semanticLabel: "color_icon".tr(),
                     ),
-                    title: Text(
-                      'theme'.tr(),
-                      style: GoogleFonts.roboto(
-                        textStyle: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: TextColor.primaryColor,
-                        ),
-                      ),
-                    ),
+                    title: Text('theme'.tr(), style: context.bodyMediumFont),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       size: 16,
                       color: IconColor.primaryColor,
+                      semanticLabel: "arrow_forward_icon".tr(),
                     ),
                     onTap: () {
                       Navigator.push(
@@ -207,13 +183,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       title: Text(
                         'notifications'.tr(),
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: TextColor.primaryColor,
-                          ),
-                        ),
+                        style: context.bodyMediumFont,
                       ),
                       trailing: Switch(
                         value: notificationController.notificationsEnabled,

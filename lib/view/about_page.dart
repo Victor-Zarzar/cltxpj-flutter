@@ -1,9 +1,9 @@
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
+import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/appbar/gf_appbar.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -47,16 +47,7 @@ class _AboutPageState extends State<AboutPage> {
                         notifier.isDark
                             ? AppBarColor.fourthColor
                             : AppBarColor.secondaryColor,
-                    title: Text(
-                      "about".tr(),
-                      style: GoogleFonts.roboto(
-                        textStyle: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: TextColor.primaryColor,
-                        ),
-                      ),
-                    ),
+                    title: Text("about".tr(), style: context.h1),
                   ),
                 ),
                 Expanded(
@@ -73,13 +64,8 @@ class _AboutPageState extends State<AboutPage> {
                         Expanded(
                           child: Text(
                             "description".tr(),
-                            style: GoogleFonts.roboto(
-                              textStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: TextColor.primaryColor,
-                              ),
-                            ),
+                            style: context.h2,
+                            textAlign: TextAlign.justify,
                           ),
                         ),
                       ],
@@ -97,13 +83,7 @@ class _AboutPageState extends State<AboutPage> {
                       child: Text(
                         "developed".tr(),
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: TextColor.primaryColor,
-                          ),
-                        ),
+                        style: context.h2,
                       ),
                     ),
                   ),

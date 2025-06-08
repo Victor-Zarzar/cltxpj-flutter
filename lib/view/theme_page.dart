@@ -1,8 +1,8 @@
 import 'package:cltxpj/features/app_theme.dart';
+import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/appbar/gf_appbar.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:cltxpj/features/theme_provider.dart';
 
@@ -19,16 +19,7 @@ class ThemePage extends StatelessWidget {
               ? BackGroundColor.fourthColor
               : BackGroundColor.primaryColor,
       appBar: GFAppBar(
-        title: Text(
-          "select_theme".tr(),
-          style: GoogleFonts.roboto(
-            textStyle: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              color: TextColor.primaryColor,
-            ),
-          ),
-        ),
+        title: Text("select_theme".tr(), style: context.h1),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -69,17 +60,12 @@ class ThemePage extends StatelessWidget {
                 }
 
                 return RadioListTile<ThemeModeOption>(
-                  title: Text(
-                    label,
-                    style: GoogleFonts.roboto(
-                      textStyle: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: TextColor.primaryColor,
-                      ),
-                    ),
+                  title: Text(label, style: context.bodyMediumFont),
+                  secondary: Icon(
+                    icon,
+                    color: IconColor.primaryColor,
+                    semanticLabel: "radio_icon".tr(),
                   ),
-                  secondary: Icon(icon, color: IconColor.primaryColor),
                   activeColor:
                       notifier.isDark
                           ? IconColor.primaryColor

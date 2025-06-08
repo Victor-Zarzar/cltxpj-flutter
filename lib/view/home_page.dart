@@ -5,11 +5,11 @@ import 'package:cltxpj/utils/chart_data_hepler.dart';
 import 'package:cltxpj/view/components/custom_button.dart';
 import 'package:cltxpj/view/components/input_field.dart';
 import 'package:cltxpj/view/components/pie_chart_widget.dart';
+import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:cltxpj/view/widgets/responsive_scaffold.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -133,11 +133,13 @@ class _HomePageState extends State<HomePage> {
                       'clt_net'.tr(
                         namedArgs: {'amount': currencyFormat.format(totalClt)},
                       ),
+                      style: context.bodySmall,
                     ), // Changed
                     Text(
                       'pj_net'.tr(
                         namedArgs: {'amount': currencyFormat.format(totalPj)},
                       ),
+                      style: context.bodySmall,
                     ), // Changed
                     const SizedBox(height: 8),
                     Text(
@@ -146,31 +148,16 @@ class _HomePageState extends State<HomePage> {
                           'amount': currencyFormat.format(difference),
                         },
                       ), // Changed
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: context.bodySmall,
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      controller.bestOption,
-                      style: const TextStyle(fontSize: 16),
-                    ),
+                    Text(controller.bestOption, style: context.bodySmallBold),
                   ],
                 ),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: Text(
-                      'close'.tr(),
-                      style: GoogleFonts.roboto(
-                        textStyle: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color:
-                              notifier.isDark
-                                  ? TextColor.primaryColor
-                                  : TextColor.fourthColor,
-                        ),
-                      ),
-                    ),
+                    child: Text('close'.tr(), style: context.bodySmallBold),
                   ),
                 ],
               );
@@ -198,16 +185,7 @@ class _HomePageState extends State<HomePage> {
                 notifier.isDark
                     ? AppBarColor.fourthColor
                     : AppBarColor.secondaryColor,
-            title: Text(
-              'app_bar_title'.tr(),
-              style: GoogleFonts.roboto(
-                textStyle: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: TextColor.primaryColor,
-                ),
-              ),
-            ),
+            title: Text('app_bar_title'.tr(), style: context.h1),
           ),
           backgroundColor:
               notifier.isDark
@@ -233,16 +211,7 @@ class _HomePageState extends State<HomePage> {
                       validator: _validator,
                       icon: Icons.money,
                       maxWidth: 600,
-                      prefix: Text(
-                        'R\$ ',
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: TextColor.primaryColor,
-                          ),
-                        ),
-                      ),
+                      prefix: Text('R\$ ', style: context.bodySmall),
                       onChanged: (_) => _formatCurrency(salaryCltController),
                     ),
                     InputField(
@@ -251,16 +220,7 @@ class _HomePageState extends State<HomePage> {
                       validator: _validator,
                       icon: Icons.money,
                       maxWidth: 600,
-                      prefix: Text(
-                        'R\$ ',
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: TextColor.primaryColor,
-                          ),
-                        ),
-                      ),
+                      prefix: Text('R\$ ', style: context.bodySmall),
                       onChanged: (_) => _formatCurrency(salaryPjController),
                     ),
                     InputField(
@@ -269,16 +229,7 @@ class _HomePageState extends State<HomePage> {
                       validator: _validator,
                       icon: Icons.card_giftcard,
                       maxWidth: 600,
-                      prefix: Text(
-                        'R\$ ',
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: TextColor.primaryColor,
-                          ),
-                        ),
-                      ),
+                      prefix: Text('R\$ ', style: context.bodySmall),
                       onChanged: (_) => _formatCurrency(benefitsController),
                     ),
                     InputField(
@@ -287,16 +238,7 @@ class _HomePageState extends State<HomePage> {
                       validator: _validator,
                       icon: Icons.receipt,
                       maxWidth: 600,
-                      prefix: Text(
-                        'R\$ ',
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: TextColor.primaryColor,
-                          ),
-                        ),
-                      ),
+                      prefix: Text('R\$ ', style: context.bodySmall),
                       onChanged:
                           (_) => _formatCurrency(accountantFeeController),
                     ),
