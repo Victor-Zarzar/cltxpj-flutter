@@ -58,6 +58,7 @@ class InputField extends StatelessWidget {
                   prefixIcon: Icon(
                     icon,
                     color: IconColor.primaryColor.withValues(alpha: 0.8),
+                    semanticLabel: "",
                   ),
                   prefix: prefix,
                   suffix: suffix,

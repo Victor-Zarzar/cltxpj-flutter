@@ -36,13 +36,24 @@ extension ResponsiveTextStyle on BuildContext {
 
   TextStyle get bodySmall => GoogleFonts.roboto(
     fontSize: ResponsiveText.getSize(this, 12),
+    color: TextColor.primaryColor,
+  );
+
+  TextStyle get bodySmallDark => GoogleFonts.roboto(
+    fontSize: ResponsiveText.getSize(this, 12),
+    color: ui.isDark ? TextColor.primaryColor : TextColor.fourthColor,
+  );
+
+  TextStyle get bodySmallDarkBold => GoogleFonts.roboto(
+    fontSize: ResponsiveText.getSize(this, 12),
+    fontWeight: FontWeight.bold,
     color: ui.isDark ? TextColor.primaryColor : TextColor.fourthColor,
   );
 
   TextStyle get bodySmallBold => GoogleFonts.roboto(
     fontSize: ResponsiveText.getSize(this, 12),
     fontWeight: FontWeight.bold,
-    color: ui.isDark ? TextColor.primaryColor : TextColor.fourthColor,
+    color: TextColor.primaryColor,
   );
 
   TextStyle get textSmall => GoogleFonts.roboto(

@@ -22,7 +22,7 @@ class PieChartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (dataMap.isEmpty) {
       return Center(
-        child: Text("no_data_display".tr(), style: context.bodySmallBold),
+        child: Text("no_data_display".tr(), style: context.bodySmallDarkBold),
       );
     }
 
@@ -95,7 +95,7 @@ class Indicator extends StatelessWidget {
               decoration: BoxDecoration(shape: BoxShape.circle, color: color),
             ),
             const SizedBox(width: 6),
-            Text(text, style: context.bodySmallBold),
+            Text(text, style: context.bodySmallDark),
           ],
         );
       },

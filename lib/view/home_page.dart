@@ -120,44 +120,51 @@ class _HomePageState extends State<HomePage> {
             builder: (context, notifier, child) {
               return AlertDialog(
                 title: Text('result'.tr()),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    PieChartWidget(
-                      dataMap: chartData,
-                      colorList: colorList,
-                      size: 180,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'clt_net'.tr(
-                        namedArgs: {'amount': currencyFormat.format(totalClt)},
+                content: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      PieChartWidget(
+                        dataMap: chartData,
+                        colorList: colorList,
+                        size: 180,
                       ),
-                      style: context.bodySmall,
-                    ), // Changed
-                    Text(
-                      'pj_net'.tr(
-                        namedArgs: {'amount': currencyFormat.format(totalPj)},
-                      ),
-                      style: context.bodySmall,
-                    ), // Changed
-                    const SizedBox(height: 8),
-                    Text(
-                      'difference'.tr(
-                        namedArgs: {
-                          'amount': currencyFormat.format(difference),
-                        },
+                      const SizedBox(height: 16),
+                      Text(
+                        'clt_net'.tr(
+                          namedArgs: {
+                            'amount': currencyFormat.format(totalClt),
+                          },
+                        ),
+                        style: context.bodySmallDark,
                       ), // Changed
-                      style: context.bodySmall,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(controller.bestOption, style: context.bodySmallBold),
-                  ],
+                      Text(
+                        'pj_net'.tr(
+                          namedArgs: {'amount': currencyFormat.format(totalPj)},
+                        ),
+                        style: context.bodySmallDark,
+                      ), // Changed
+                      const SizedBox(height: 8),
+                      Text(
+                        'difference'.tr(
+                          namedArgs: {
+                            'amount': currencyFormat.format(difference),
+                          },
+                        ), // Changed
+                        style: context.bodySmallDarkBold,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        controller.bestOption,
+                        style: context.bodySmallDarkBold,
+                      ),
+                    ],
+                  ),
                 ),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: Text('close'.tr(), style: context.bodySmallBold),
+                    child: Text('close'.tr(), style: context.bodySmallDarkBold),
                   ),
                 ],
               );
