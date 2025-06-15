@@ -3,7 +3,6 @@ import 'package:cltxpj/features/theme_provider.dart';
 import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:getwidget/components/appbar/gf_appbar.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -40,7 +39,7 @@ class _AboutPageState extends State<AboutPage> {
               children: [
                 SizedBox(
                   width: myWidth,
-                  child: GFAppBar(
+                  child: AppBar(
                     automaticallyImplyLeading: false,
                     centerTitle: true,
                     backgroundColor:

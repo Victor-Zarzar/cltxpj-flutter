@@ -1,15 +1,12 @@
 import 'package:cltxpj/controller/calculate_controller.dart';
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
-import 'package:cltxpj/utils/chart_data_hepler.dart';
-import 'package:cltxpj/view/components/custom_button.dart';
-import 'package:cltxpj/view/components/input_field.dart';
-import 'package:cltxpj/view/components/pie_chart_widget.dart';
+import 'package:cltxpj/view/widgets/body_container.dart';
 import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:cltxpj/view/widgets/responsive_scaffold.dart';
+import 'package:cltxpj/view/widgets/show_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -98,79 +95,22 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _showResult() {
-    final controller = context.read<CalculatorController>();
-    final totalClt = controller.totalClt;
-    final totalPj = controller.totalPj;
-    final difference = (totalClt - totalPj).abs();
+    ResultDialog.show(context, currencyFormat);
+  }
 
-    final chartData = ChartDataHelper.buildResultChartData(
-      cltNet: totalClt,
-      pjNet: totalPj,
-    );
-
-    final colorList = [
-      PieChartColor.primaryColor,
-      PieChartColor.secondaryColor,
-    ];
-
-    showDialog(
-      context: context,
-      builder:
-          (_) => Consumer<UiProvider>(
-            builder: (context, notifier, child) {
-              return AlertDialog(
-                title: Text('result'.tr()),
-                content: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      PieChartWidget(
-                        dataMap: chartData,
-                        colorList: colorList,
-                        size: 180,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'clt_net'.tr(
-                          namedArgs: {
-                            'amount': currencyFormat.format(totalClt),
-                          },
-                        ),
-                        style: context.bodySmallDark,
-                      ), // Changed
-                      Text(
-                        'pj_net'.tr(
-                          namedArgs: {'amount': currencyFormat.format(totalPj)},
-                        ),
-                        style: context.bodySmallDark,
-                      ), // Changed
-                      const SizedBox(height: 8),
-                      Text(
-                        'difference'.tr(
-                          namedArgs: {
-                            'amount': currencyFormat.format(difference),
-                          },
-                        ), // Changed
-                        style: context.bodySmallDarkBold,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        controller.bestOption,
-                        style: context.bodySmallDarkBold,
-                      ),
-                    ],
-                  ),
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: Text('close'.tr(), style: context.bodySmallDarkBold),
-                  ),
-                ],
-              );
-            },
-          ),
-    );
+  void _onCalculatePressed() {
+    if (_formKey.currentState!.validate()) {
+      final controller = context.read<CalculatorController>();
+      controller.updateValues(
+        salaryClt: parseCurrency(salaryCltController.text),
+        salaryPj: parseCurrency(salaryPjController.text),
+        benefits: parseCurrency(benefitsController.text),
+        taxesPj: double.parse(taxesPjController.text.replaceAll(',', '.')),
+        accountantFee: parseCurrency(accountantFeeController.text),
+        inssPj: double.parse(inssPjController.text.replaceAll(',', '.')) / 100,
+      );
+      _showResult();
+    }
   }
 
   Widget _buildMobileLayout() => _buildFormLayout(padding: 16);
@@ -180,13 +120,10 @@ class _HomePageState extends State<HomePage> {
   Widget _buildDesktopLayout() => _buildFormLayout(padding: 50);
 
   Widget _buildFormLayout({required double padding}) {
-    final controller = context.watch<CalculatorController>();
-
     return Consumer<UiProvider>(
       builder: (context, notifier, child) {
         return Scaffold(
-          appBar: GFAppBar(
-            automaticallyImplyLeading: false,
+          appBar: AppBar(
             centerTitle: true,
             backgroundColor:
                 notifier.isDark
@@ -198,106 +135,19 @@ class _HomePageState extends State<HomePage> {
               notifier.isDark
                   ? BackGroundColor.fourthColor
                   : BackGroundColor.primaryColor,
-          body: GestureDetector(
-            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-            child: SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(
-                padding,
-                padding + 60,
-                padding,
-                padding,
-              ),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    InputField(
-                      label: 'salary_clt'.tr(),
-                      controller: salaryCltController,
-                      validator: _validator,
-                      icon: Icons.money,
-                      maxWidth: 600,
-                      prefix: Text('R\$ ', style: context.bodySmall),
-                      onChanged: (_) => _formatCurrency(salaryCltController),
-                    ),
-                    InputField(
-                      label: 'salary_pj'.tr(),
-                      controller: salaryPjController,
-                      validator: _validator,
-                      icon: Icons.money,
-                      maxWidth: 600,
-                      prefix: Text('R\$ ', style: context.bodySmall),
-                      onChanged: (_) => _formatCurrency(salaryPjController),
-                    ),
-                    InputField(
-                      label: 'benefits_clt'.tr(),
-                      controller: benefitsController,
-                      validator: _validator,
-                      icon: Icons.card_giftcard,
-                      maxWidth: 600,
-                      prefix: Text('R\$ ', style: context.bodySmall),
-                      onChanged: (_) => _formatCurrency(benefitsController),
-                    ),
-                    InputField(
-                      label: 'accountant_fee'.tr(),
-                      controller: accountantFeeController,
-                      validator: _validator,
-                      icon: Icons.receipt,
-                      maxWidth: 600,
-                      prefix: Text('R\$ ', style: context.bodySmall),
-                      onChanged:
-                          (_) => _formatCurrency(accountantFeeController),
-                    ),
-
-                    InputField(
-                      label: 'inss_pj'.tr(),
-                      controller: inssPjController,
-                      validator: _validator,
-                      icon: Icons.percent,
-                      maxWidth: 600,
-                    ),
-                    InputField(
-                      label: 'taxes_pj'.tr(),
-                      controller: taxesPjController,
-                      validator: _validator,
-                      icon: Icons.percent,
-                      maxWidth: 600,
-                    ),
-                    const SizedBox(height: 20),
-                    CustomButton(
-                      maxWidth: 600,
-                      color:
-                          notifier.isDark
-                              ? ButtonColor.fourthColor
-                              : ButtonColor.primaryColor,
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          controller.updateValues(
-                            salaryClt: parseCurrency(salaryCltController.text),
-                            salaryPj: parseCurrency(salaryPjController.text),
-                            benefits: parseCurrency(benefitsController.text),
-                            taxesPj: double.parse(
-                              taxesPjController.text.replaceAll(',', '.'),
-                            ),
-                            accountantFee: parseCurrency(
-                              accountantFeeController.text,
-                            ),
-                            inssPj:
-                                double.parse(
-                                  inssPjController.text.replaceAll(',', '.'),
-                                ) /
-                                100,
-                          );
-                          _showResult();
-                        }
-                      },
-                      text: 'calculate'.tr(),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          body: BodyContainer(
+            formKey: _formKey,
+            salaryCltController: salaryCltController,
+            salaryPjController: salaryPjController,
+            benefitsController: benefitsController,
+            taxesPjController: taxesPjController,
+            accountantFeeController: accountantFeeController,
+            inssPjController: inssPjController,
+            formatCurrency: _formatCurrency,
+            parseCurrency: parseCurrency,
+            validator: _validator,
+            onCalculatePressed: _onCalculatePressed,
+            padding: padding,
           ),
         );
       },

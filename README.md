@@ -6,7 +6,7 @@
 
 - Dart
 - Flutter
-- Get Widget UI
+- Material Design 3 (UI) 
 - Google Fonts
 - Locale Language EN / PT-BR / ES
 - Dark Mode Provider

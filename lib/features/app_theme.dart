@@ -14,7 +14,7 @@ class AppBarColor {
   static Color get primaryColor => const Color(0xFF1B5E20);
   static Color get secondaryColor => const Color(0xFF2E7D32);
   static Color get thirdColor => const Color(0xFF81C784);
-  static Color get fourthColor => const Color(0xFF000000);
+  static Color get fourthColor => const Color(0xFF090707);
 }
 
 class BackGroundColor {
@@ -22,7 +22,7 @@ class BackGroundColor {
   static Color get primaryColor => const Color(0xFF0D1B0F);
   static Color get secondaryColor => const Color(0xFFF1F8E9);
   static Color get thirdColor => const Color(0xFF212121);
-  static Color get fourthColor => const Color(0xFF000000);
+  static Color get fourthColor => const Color(0xFF090707);
 }
 
 class TextColor {
@@ -46,7 +46,7 @@ class TabBarColor {
   static Color get primaryColor => const Color(0xFF4CAF50);
   static Color get secondaryColor => const Color(0xFF66BB6A);
   static Color get thirdColor => const Color(0xFF81C784);
-  static Color get fourthColor => const Color(0xFF000000);
+  static Color get fourthColor => const Color(0xFF090707);
 }
 
 class TextFormColor {
@@ -62,7 +62,7 @@ class ButtonColor {
   static Color get primaryColor => const Color(0xFF4CAF50);
   static Color get secondaryColor => const Color(0xFF66BB6A);
   static Color get thirdColor => const Color(0xFF81C784);
-  static Color get fourthColor => const Color(0xFF212121);
+  static Color get fourthColor => const Color(0xFF303030);
 }
 
 class TextButtonColor {
@@ -120,4 +120,12 @@ class PieChartColor {
   PieChartColor._();
   static Color get primaryColor => const Color(0xFF0277BD);
   static Color get secondaryColor => const Color(0xFF4CAF50);
+}
+
+class CardColor {
+  CardColor._();
+  static Color get primaryColor => const Color(0xFF0D1B0F);
+  static Color get secondaryColor => const Color(0xFF1B5E20);
+  static Color get thirdColor => const Color(0xFF0F0C0C);
+  static Color get fourthColor => const Color(0xFF000000);
 }

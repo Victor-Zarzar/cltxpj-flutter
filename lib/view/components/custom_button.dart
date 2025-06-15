@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 
 class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -23,17 +22,26 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget button = GFButton(
+    final Widget button = FilledButton(
       onPressed: onPressed,
-      color: color,
-      fullWidthButton: fullWidth,
-      size: GFSize.LARGE,
-      shape: GFButtonShape.standard,
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.all(color),
+        minimumSize: WidgetStateProperty.all(Size(minWidth ?? 0, height ?? 30)),
+        maximumSize: WidgetStateProperty.all(
+          Size(maxWidth ?? double.infinity, height ?? 30),
+        ),
+        padding: WidgetStateProperty.all(
+          const EdgeInsets.symmetric(horizontal: 16),
+        ),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      ),
       child: Text(text),
     );
 
     if (fullWidth) {
-      return SizedBox(height: height, width: double.infinity, child: button);
+      return SizedBox(width: double.infinity, height: height, child: button);
     }
 
     return Center(

@@ -23,7 +23,6 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   flutter_dotenv: ^5.2.1
   flutter_svg: ^2.1.0
-  getwidget: ^6.0.0
   fl_chart: ^1.0.0
   flutter_masked_text2: ^0.9.1
 
