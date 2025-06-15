@@ -2,7 +2,9 @@ import 'package:cltxpj/controller/locale_controller.dart';
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
 import 'package:cltxpj/view/about_page.dart';
+import 'package:cltxpj/view/clt_salary_page.dart';
 import 'package:cltxpj/view/home_page.dart';
+import 'package:cltxpj/view/pj_salary_page.dart';
 import 'package:cltxpj/view/settings_page.dart';
 import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -22,7 +24,7 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 5, vsync: this);
   }
 
   @override
@@ -35,7 +37,6 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final currentLocale = context.locale;
     final notifier = context.watch<UiProvider>();
-    final isDark = notifier.isDark;
 
     return Consumer<LocaleController>(
       builder: (context, languageProvider, child) {
@@ -43,10 +44,19 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
           body: TabBarView(
             key: ValueKey(currentLocale),
             controller: tabController,
-            children: const [HomePage(), AboutPage(), SettingsPage()],
+            children: const [
+              HomePage(),
+              Cltpage(),
+              Pjpage(),
+              AboutPage(),
+              SettingsPage(),
+            ],
           ),
           bottomNavigationBar: Material(
-            color: isDark ? TabBarColor.fourthColor : TabBarColor.primaryColor,
+            color:
+                notifier.isDark
+                    ? TabBarColor.fourthColor
+                    : TabBarColor.primaryColor,
             child: TabBar(
               controller: tabController,
               labelColor: TextColor.primaryColor,
@@ -54,11 +64,42 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
               tabs: [
                 Tab(
                   icon: Icon(
-                    Icons.money,
+                    Icons.calculate,
                     semanticLabel: "money_icon".tr(),
                     color: IconColor.primaryColor,
                   ),
-                  child: Text('home'.tr(), style: context.footerMediumFont),
+                  child: Text(
+                    'home'.tr(),
+                    style: context.footerMediumFont,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ),
+                Tab(
+                  icon: Icon(
+                    Icons.work,
+                    semanticLabel: "money_icon".tr(),
+                    color: IconColor.primaryColor,
+                  ),
+                  child: Text(
+                    'Clt',
+                    style: context.footerMediumFont,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ),
+                Tab(
+                  icon: Icon(
+                    Icons.business,
+                    semanticLabel: "money_icon".tr(),
+                    color: IconColor.primaryColor,
+                  ),
+                  child: Text(
+                    'Pj',
+                    style: context.footerMediumFont,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ),
                 Tab(
                   icon: Icon(
@@ -66,7 +107,12 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
                     semanticLabel: "info_icon".tr(),
                     color: IconColor.primaryColor,
                   ),
-                  child: Text('about'.tr(), style: context.footerMediumFont),
+                  child: Text(
+                    'about'.tr(),
+                    style: context.footerMediumFont,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ),
                 Tab(
                   icon: Icon(
@@ -74,7 +120,12 @@ class _AppPageState extends State<AppPage> with TickerProviderStateMixin {
                     semanticLabel: "settings_icon".tr(),
                     color: IconColor.primaryColor,
                   ),
-                  child: Text('settings'.tr(), style: context.footerMediumFont),
+                  child: Text(
+                    'settings'.tr(),
+                    style: context.footerMediumFont,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ),
               ],
             ),

@@ -2,12 +2,19 @@ import 'package:cltxpj/model/calculate_model.dart';
 import 'package:cltxpj/utils/salary_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import '../services/storage_service.dart';
 
 final currencyFormat = NumberFormat.currency(
   locale: 'pt_BR',
   symbol: '',
   decimalDigits: 2,
+);
+
+final benefitsController = MoneyMaskedTextController(
+  leftSymbol: 'R\$ ',
+  decimalSeparator: ',',
+  thousandSeparator: '.',
 );
 
 class CalculatorController extends ChangeNotifier {

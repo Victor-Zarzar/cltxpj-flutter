@@ -1,6 +1,8 @@
 import 'package:cltxpj/controller/calculate_controller.dart';
+import 'package:cltxpj/controller/clt_controller.dart';
 import 'package:cltxpj/controller/locale_controller.dart';
 import 'package:cltxpj/controller/notification_controller.dart';
+import 'package:cltxpj/controller/pj_controller.dart';
 import 'package:cltxpj/features/theme_provider.dart';
 import 'package:cltxpj/services/notification_service.dart';
 import 'package:cltxpj/services/secure_service.dart';
@@ -31,6 +33,8 @@ void main() async {
           ChangeNotifierProvider(create: (_) => NotificationController()),
           ChangeNotifierProvider(create: (_) => LocaleController()),
           ChangeNotifierProvider(create: (_) => CalculatorController()),
+          ChangeNotifierProvider(create: (_) => CltController()),
+          ChangeNotifierProvider(create: (_) => PjController()),
           ChangeNotifierProvider(create: (_) => UiProvider()..init()),
         ],
         child: const MyApp(),

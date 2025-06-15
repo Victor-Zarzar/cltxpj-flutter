@@ -32,10 +32,7 @@ class ResultDialog extends StatelessWidget {
       pjNet: totalPj,
     );
 
-    final colorList = [
-      PieChartColor.primaryColor,
-      PieChartColor.secondaryColor,
-    ];
+    final colorList = [ChartColor.thirdColor, ChartColor.fourthColor];
 
     return Consumer<UiProvider>(
       builder: (context, notifier, child) {

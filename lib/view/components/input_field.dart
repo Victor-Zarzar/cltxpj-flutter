@@ -1,7 +1,9 @@
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
 import 'package:cltxpj/view/widgets/responsive_extension.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class InputField extends StatelessWidget {
@@ -47,6 +49,9 @@ class InputField extends StatelessWidget {
                 validator: validator,
                 keyboardType: keyboardType,
                 obscureText: obscureText,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9,.]')),
+                ],
                 style: context.bodySmallBold,
                 onChanged: onChanged,
                 decoration: InputDecoration(
@@ -58,7 +63,7 @@ class InputField extends StatelessWidget {
                   prefixIcon: Icon(
                     icon,
                     color: IconColor.primaryColor.withValues(alpha: 0.8),
-                    semanticLabel: "",
+                    semanticLabel: "icons_input".tr(),
                   ),
                   prefix: prefix,
                   suffix: suffix,

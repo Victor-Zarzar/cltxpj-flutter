@@ -107,7 +107,7 @@ class PopupMenuColor {
   static Color get primaryColor => const Color(0xFFECEFF1);
   static Color get secondaryColor => const Color(0xFF212121);
   static Color get thirdColor => const Color(0xFF4CAF50);
-  static Color get fourthColor => const Color(0xFF000000);
+  static Color get fourthColor => const Color(0xFF090707);
 }
 
 class BorderColor {
@@ -128,4 +128,18 @@ class CardColor {
   static Color get secondaryColor => const Color(0xFF1B5E20);
   static Color get thirdColor => const Color(0xFF0F0C0C);
   static Color get fourthColor => const Color(0xFF000000);
+}
+
+class LoadingColor {
+  LoadingColor._();
+  static Color get primaryColor => const Color(0xFFF1F8E9);
+  static Color get secondaryColor => const Color(0xFF4CAF50);
+}
+
+class ChartColor {
+  ChartColor._();
+  static Color get primaryColor => const Color(0xFFFF5733);
+  static Color get secondaryColor => const Color(0xFFFFAE33);
+  static Color get thirdColor => const Color(0xFF339CFF);
+  static Color get fourthColor => const Color(0xFF20A819);
 }

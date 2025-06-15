@@ -36,11 +36,11 @@ class PieChartWidget extends StatelessWidget {
             value: entry.value.abs(),
             title: entry.value.toStringAsFixed(0),
             titleStyle: TextStyle(
-              fontSize: size / 9,
+              fontSize: size / (entry.value < 100 ? 9 : 11),
               fontWeight: FontWeight.bold,
               color: TextColor.primaryColor,
             ),
-            radius: size / 2.6,
+            radius: size / 2.3,
           );
         }).toList();
 
@@ -61,7 +61,7 @@ class PieChartWidget extends StatelessWidget {
         const SizedBox(height: 16),
         Wrap(
           alignment: WrapAlignment.center,
-          spacing: 20,
+          spacing: 12,
           runSpacing: 8,
           children:
               dataMap.entries.map((entry) {

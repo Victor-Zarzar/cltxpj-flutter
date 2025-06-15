@@ -52,7 +52,7 @@ class BodyContainer extends StatelessWidget {
             ),
             child: Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 700),
+                constraints: const BoxConstraints(maxWidth: 400),
                 child: Card(
                   color:
                       notifier.isDark
@@ -74,7 +74,7 @@ class BodyContainer extends StatelessWidget {
                             controller: salaryCltController,
                             validator: validator,
                             icon: Icons.money,
-                            maxWidth: 600,
+                            maxWidth: 400,
                             prefix: Text('R\$ ', style: context.bodySmall),
                             onChanged:
                                 (_) => formatCurrency(salaryCltController),
@@ -84,7 +84,7 @@ class BodyContainer extends StatelessWidget {
                             controller: salaryPjController,
                             validator: validator,
                             icon: Icons.money,
-                            maxWidth: 600,
+                            maxWidth: 400,
                             prefix: Text('R\$ ', style: context.bodySmall),
                             onChanged:
                                 (_) => formatCurrency(salaryPjController),
@@ -94,7 +94,7 @@ class BodyContainer extends StatelessWidget {
                             controller: benefitsController,
                             validator: validator,
                             icon: Icons.card_giftcard,
-                            maxWidth: 600,
+                            maxWidth: 400,
                             prefix: Text('R\$ ', style: context.bodySmall),
                             onChanged:
                                 (_) => formatCurrency(benefitsController),
@@ -104,7 +104,7 @@ class BodyContainer extends StatelessWidget {
                             controller: accountantFeeController,
                             validator: validator,
                             icon: Icons.receipt,
-                            maxWidth: 600,
+                            maxWidth: 400,
                             prefix: Text('R\$ ', style: context.bodySmall),
                             onChanged:
                                 (_) => formatCurrency(accountantFeeController),
@@ -114,18 +114,18 @@ class BodyContainer extends StatelessWidget {
                             controller: inssPjController,
                             validator: validator,
                             icon: Icons.percent,
-                            maxWidth: 600,
+                            maxWidth: 400,
                           ),
                           InputField(
                             label: 'taxes_pj'.tr(),
                             controller: taxesPjController,
                             validator: validator,
                             icon: Icons.percent,
-                            maxWidth: 600,
+                            maxWidth: 400,
                           ),
                           const SizedBox(height: 20),
                           CustomButton(
-                            maxWidth: 600,
+                            maxWidth: 400,
                             color:
                                 notifier.isDark
                                     ? ButtonColor.fourthColor

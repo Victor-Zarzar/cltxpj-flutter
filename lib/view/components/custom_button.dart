@@ -1,3 +1,4 @@
+import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -37,7 +38,7 @@ class CustomButton extends StatelessWidget {
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
       ),
-      child: Text(text),
+      child: Text(text, style: context.bodySmallBold),
     );
 
     if (fullWidth) {

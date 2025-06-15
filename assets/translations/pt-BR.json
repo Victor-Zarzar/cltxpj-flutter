@@ -1,8 +1,10 @@
 {
   "app_bar_title": "Calculadora CLT vs PJ",
-  "salary_clt": "Salário CLT",
-  "salary_pj": "Salário PJ",
-  "benefits_clt": "Benefícios CLT",
+  "clt_title": "CLT - Salário líquido",
+  "pj_title": "PJ - Salário líquido",
+  "salary_clt": "Salário Bruto CLT",
+  "salary_pj": "Salário Bruto PJ",
+  "benefits_clt": "Benefícios (VR, VA, etc)",
   "accountant_fee": "Taxa do Contador (PJ)",
   "inss_pj": "INSS PJ (%)",
   "taxes_pj": "Impostos PJ (%)",
@@ -49,5 +51,14 @@
   "arrow_drop_icon": "Ícone de seta para soltar",
   "color_icon": "Ícone de cor",
   "arrow_forward_icon": "Ícone de seta para frente",
-  "radio_icon": "Ícone de rádio"
+  "radio_icon": "Ícone de rádio",
+  "icons_input": "Entrada de ícones",
+  "fill_fields_to_see_chart": "Preencha os campos acima para visualizar o gráfico.",
+  "net_salary": "Salário Líquido",
+  "taxes": "Impostos",
+  "accountant": "Contador",
+  "inss": "INSS",
+  "net": "Líquido",
+  "irrf": "IRRF",
+  "benefits": "Benefícios"
 }
