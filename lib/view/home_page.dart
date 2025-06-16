@@ -2,8 +2,8 @@ import 'package:cltxpj/controller/calculate_controller.dart';
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
 import 'package:cltxpj/view/widgets/body_home_container.dart';
+import 'package:cltxpj/view/widgets/responsive.dart';
 import 'package:cltxpj/view/widgets/responsive_extension.dart';
-import 'package:cltxpj/view/widgets/responsive_scaffold.dart';
 import 'package:cltxpj/view/widgets/show_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +46,6 @@ class _HomePageState extends State<HomePage> {
       inssPjController.text = (controller.model.inssPj * 100).toStringAsFixed(
         2,
       );
-
       taxesPjController.text = controller.model.taxesPj.toString();
     });
   }
@@ -59,7 +58,6 @@ class _HomePageState extends State<HomePage> {
     taxesPjController.dispose();
     accountantFeeController.dispose();
     inssPjController.dispose();
-
     super.dispose();
   }
 
@@ -83,7 +81,6 @@ class _HomePageState extends State<HomePage> {
   double parseCurrency(String value) {
     String cleaned = value.replaceAll(RegExp(r'[^0-9]'), '');
     if (cleaned.isEmpty) return 0.0;
-
     return double.parse(cleaned) / 100;
   }
 
@@ -113,13 +110,12 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Widget _buildMobileLayout() => _buildFormLayout(padding: 16);
-
-  Widget _buildTabletLayout() => _buildFormLayout(padding: 30);
-
-  Widget _buildDesktopLayout() => _buildFormLayout(padding: 50);
-
-  Widget _buildFormLayout({required double padding}) {
+  Widget _buildContent(
+    BuildContext context, {
+    required double maxWidth,
+    required double minHeight,
+    required double padding,
+  }) {
     return Consumer<UiProvider>(
       builder: (context, notifier, child) {
         return Scaffold(
@@ -148,6 +144,8 @@ class _HomePageState extends State<HomePage> {
             validator: _validator,
             onCalculatePressed: _onCalculatePressed,
             padding: padding,
+            maxWidth: maxWidth,
+            minHeight: minHeight,
           ),
         );
       },
@@ -156,10 +154,25 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveScaffold(
-      mobile: _buildMobileLayout,
-      tablet: _buildTabletLayout,
-      desktop: _buildDesktopLayout,
+    return Responsive(
+      mobile: _buildContent(
+        context,
+        maxWidth: 360,
+        minHeight: 600,
+        padding: 20,
+      ),
+      tablet: _buildContent(
+        context,
+        maxWidth: 600,
+        minHeight: 600,
+        padding: 30,
+      ),
+      desktop: _buildContent(
+        context,
+        maxWidth: 700,
+        minHeight: 570,
+        padding: 50,
+      ),
     );
   }
 }

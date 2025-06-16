@@ -51,7 +51,7 @@ class PjChart extends StatelessWidget {
           children: [
             Text(
               '${'net_salary'.tr()}: ${currencyFormat.format(ctrl.netSalary)}',
-              style: Theme.of(context).textTheme.titleMedium,
+              style: context.h1,
             ),
             const SizedBox(height: 0),
             PieChartWidget(

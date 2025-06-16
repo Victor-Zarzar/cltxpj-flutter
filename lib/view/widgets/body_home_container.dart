@@ -20,6 +20,8 @@ class BodyContainer extends StatelessWidget {
   final String? Function(String?) validator;
   final VoidCallback onCalculatePressed;
   final double padding;
+  final double minHeight;
+  final double maxWidth;
 
   const BodyContainer({
     super.key,
@@ -35,6 +37,8 @@ class BodyContainer extends StatelessWidget {
     required this.validator,
     required this.onCalculatePressed,
     required this.padding,
+    required this.minHeight,
+    required this.maxWidth,
   });
 
   @override
@@ -52,7 +56,10 @@ class BodyContainer extends StatelessWidget {
             ),
             child: Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 400),
+                constraints: BoxConstraints(
+                  minHeight: minHeight,
+                  maxWidth: maxWidth,
+                ),
                 child: Card(
                   color:
                       notifier.isDark
@@ -74,7 +81,7 @@ class BodyContainer extends StatelessWidget {
                             controller: salaryCltController,
                             validator: validator,
                             icon: Icons.money,
-                            maxWidth: 400,
+                            maxWidth: maxWidth,
                             prefix: Text('R\$ ', style: context.bodySmall),
                             onChanged:
                                 (_) => formatCurrency(salaryCltController),
@@ -84,7 +91,7 @@ class BodyContainer extends StatelessWidget {
                             controller: salaryPjController,
                             validator: validator,
                             icon: Icons.money,
-                            maxWidth: 400,
+                            maxWidth: maxWidth,
                             prefix: Text('R\$ ', style: context.bodySmall),
                             onChanged:
                                 (_) => formatCurrency(salaryPjController),
@@ -94,7 +101,7 @@ class BodyContainer extends StatelessWidget {
                             controller: benefitsController,
                             validator: validator,
                             icon: Icons.card_giftcard,
-                            maxWidth: 400,
+                            maxWidth: maxWidth,
                             prefix: Text('R\$ ', style: context.bodySmall),
                             onChanged:
                                 (_) => formatCurrency(benefitsController),
@@ -104,7 +111,7 @@ class BodyContainer extends StatelessWidget {
                             controller: accountantFeeController,
                             validator: validator,
                             icon: Icons.receipt,
-                            maxWidth: 400,
+                            maxWidth: maxWidth,
                             prefix: Text('R\$ ', style: context.bodySmall),
                             onChanged:
                                 (_) => formatCurrency(accountantFeeController),
@@ -114,18 +121,18 @@ class BodyContainer extends StatelessWidget {
                             controller: inssPjController,
                             validator: validator,
                             icon: Icons.percent,
-                            maxWidth: 400,
+                            maxWidth: maxWidth,
                           ),
                           InputField(
                             label: 'taxes_pj'.tr(),
                             controller: taxesPjController,
                             validator: validator,
                             icon: Icons.percent,
-                            maxWidth: 400,
+                            maxWidth: maxWidth,
                           ),
                           const SizedBox(height: 20),
                           CustomButton(
-                            maxWidth: 400,
+                            maxWidth: maxWidth,
                             color:
                                 notifier.isDark
                                     ? ButtonColor.fourthColor
