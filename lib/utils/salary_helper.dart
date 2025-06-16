@@ -1,35 +1,35 @@
 double calculateInss(double grossSalary) {
-  if (grossSalary <= 1412.00) {
+  if (grossSalary <= 1518.00) {
     return grossSalary * 0.075;
-  } else if (grossSalary <= 2666.68) {
-    return (1412.00 * 0.075) + ((grossSalary - 1412.00) * 0.09);
-  } else if (grossSalary <= 4000.03) {
-    return (1412.00 * 0.075) +
-        ((2666.68 - 1412.00) * 0.09) +
-        ((grossSalary - 2666.68) * 0.12);
-  } else if (grossSalary <= 7786.02) {
-    return (1412.00 * 0.075) +
-        ((2666.68 - 1412.00) * 0.09) +
-        ((4000.03 - 2666.68) * 0.12) +
-        ((grossSalary - 4000.03) * 0.14);
+  } else if (grossSalary <= 2793.88) {
+    return (1518.00 * 0.075) + ((grossSalary - 1518.00) * 0.09);
+  } else if (grossSalary <= 4190.83) {
+    return (1518.00 * 0.075) +
+        ((2793.88 - 1518.00) * 0.09) +
+        ((grossSalary - 2793.88) * 0.12);
+  } else if (grossSalary <= 8157.41) {
+    return (1518.00 * 0.075) +
+        ((2793.88 - 1518.00) * 0.09) +
+        ((4190.83 - 2793.88) * 0.12) +
+        ((grossSalary - 4190.83) * 0.14);
   } else {
-    return 908.85;
+    return 1236.70;
   }
 }
 
 double calculateIrrf(double grossSalary) {
   final inss = calculateInss(grossSalary);
-  final taxableIncome = grossSalary - inss;
+  final base = grossSalary - inss;
 
-  if (taxableIncome <= 2259.20) {
+  if (base <= 2428.80) {
     return 0.0;
-  } else if (taxableIncome <= 2826.65) {
-    return (taxableIncome * 0.075) - 169.44;
-  } else if (taxableIncome <= 3751.05) {
-    return (taxableIncome * 0.15) - 381.44;
-  } else if (taxableIncome <= 4664.68) {
-    return (taxableIncome * 0.225) - 662.77;
+  } else if (base <= 2826.65) {
+    return (base * 0.075) - 182.16;
+  } else if (base <= 3751.05) {
+    return (base * 0.15) - 394.16;
+  } else if (base <= 4664.68) {
+    return (base * 0.225) - 675.49;
   } else {
-    return (taxableIncome * 0.275) - 896.00;
+    return (base * 0.275) - 908.73;
   }
 }

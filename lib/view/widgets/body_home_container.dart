@@ -48,12 +48,7 @@ class BodyContainer extends StatelessWidget {
         return GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: SingleChildScrollView(
-            padding: EdgeInsets.fromLTRB(
-              padding,
-              padding + 40,
-              padding,
-              padding,
-            ),
+            padding: EdgeInsets.all(padding),
             child: Center(
               child: ConstrainedBox(
                 constraints: BoxConstraints(
@@ -70,7 +65,7 @@ class BodyContainer extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(24.0),
+                    padding: EdgeInsets.all(padding),
                     child: Form(
                       key: formKey,
                       child: Column(

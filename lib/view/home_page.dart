@@ -157,9 +157,9 @@ class _HomePageState extends State<HomePage> {
     return Responsive(
       mobile: _buildContent(
         context,
-        maxWidth: 360,
-        minHeight: 600,
+        maxWidth: 320,
         padding: 20,
+        minHeight: 550,
       ),
       tablet: _buildContent(
         context,

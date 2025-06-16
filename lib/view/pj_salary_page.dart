@@ -37,7 +37,7 @@ class _PjpageState extends State<Pjpage> {
       body: Responsive(
         mobile: _buildContent(
           context,
-          maxWidth: 360,
+          maxWidth: 320,
           padding: 20,
           minHeight: 550,
         ),
@@ -77,45 +77,48 @@ class _PjpageState extends State<Pjpage> {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  InputField(
-                    label: 'salary_pj'.tr(),
-                    controller: controller.salaryController,
-                    validator: (v) => null,
-                    icon: Icons.business,
-                    maxWidth: maxWidth,
-                    onChanged: (_) => controller.calculateDebounced(),
-                  ),
-                  InputField(
-                    label: 'taxes_pj'.tr(),
-                    controller: controller.taxController,
-                    validator: (v) => null,
-                    icon: Icons.percent,
-                    maxWidth: maxWidth,
-                    onChanged: (_) => controller.calculateDebounced(),
-                  ),
-                  InputField(
-                    label: 'accountant_fee'.tr(),
-                    controller: controller.accountantController,
-                    validator: (v) => null,
-                    icon: Icons.receipt_long,
-                    maxWidth: maxWidth,
-                    onChanged: (_) => controller.calculateDebounced(),
-                  ),
-                  InputField(
-                    label: 'inss_pj'.tr(),
-                    controller: controller.inssController,
-                    validator: (v) => null,
-                    icon: Icons.shield,
-                    maxWidth: maxWidth,
-                    onChanged: (_) => controller.calculateDebounced(),
-                  ),
-                  const SizedBox(height: 10),
-                  const PjChart(),
-                ],
+            padding: EdgeInsets.all(padding),
+            child: GestureDetector(
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    InputField(
+                      label: 'salary_pj'.tr(),
+                      controller: controller.salaryController,
+                      validator: (v) => null,
+                      icon: Icons.business,
+                      maxWidth: maxWidth,
+                      onChanged: (_) => controller.calculateDebounced(),
+                    ),
+                    InputField(
+                      label: 'taxes_pj'.tr(),
+                      controller: controller.taxController,
+                      validator: (v) => null,
+                      icon: Icons.percent,
+                      maxWidth: maxWidth,
+                      onChanged: (_) => controller.calculateDebounced(),
+                    ),
+                    InputField(
+                      label: 'accountant_fee'.tr(),
+                      controller: controller.accountantController,
+                      validator: (v) => null,
+                      icon: Icons.receipt_long,
+                      maxWidth: maxWidth,
+                      onChanged: (_) => controller.calculateDebounced(),
+                    ),
+                    InputField(
+                      label: 'inss_pj'.tr(),
+                      controller: controller.inssController,
+                      validator: (v) => null,
+                      icon: Icons.shield,
+                      maxWidth: maxWidth,
+                      onChanged: (_) => controller.calculateDebounced(),
+                    ),
+                    const SizedBox(height: 0),
+                    const PjChart(),
+                  ],
+                ),
               ),
             ),
           ),

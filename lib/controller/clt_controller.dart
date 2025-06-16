@@ -6,13 +6,13 @@ import 'package:cltxpj/services/storage_service.dart';
 import 'package:cltxpj/model/calculate_model.dart';
 
 class CltController extends ChangeNotifier {
-  final salaryController = MoneyMaskedTextController(
+  final cltSalaryController = MoneyMaskedTextController(
     leftSymbol: 'R\$ ',
     decimalSeparator: ',',
     thousandSeparator: '.',
   );
 
-  final benefitsController = MoneyMaskedTextController(
+  final cltBenefitsController = MoneyMaskedTextController(
     leftSymbol: 'R\$ ',
     decimalSeparator: ',',
     thousandSeparator: '.',
@@ -31,8 +31,8 @@ class CltController extends ChangeNotifier {
   }
 
   void calculate() {
-    final salary = salaryController.numberValue;
-    benefits = benefitsController.numberValue;
+    final salary = cltSalaryController.numberValue;
+    benefits = cltBenefitsController.numberValue;
 
     inss = calculateInss(salary);
     irrf = calculateIrrf(salary);
@@ -45,7 +45,7 @@ class CltController extends ChangeNotifier {
   }
 
   void calculateDebounced() {
-    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 800), () {
       calculate();
     });
@@ -53,8 +53,8 @@ class CltController extends ChangeNotifier {
 
   Future<void> _loadData() async {
     final model = await StorageService.loadData();
-    salaryController.updateValue(model.salaryClt);
-    benefitsController.updateValue(model.benefits);
+    cltSalaryController.updateValue(model.salaryClt);
+    cltBenefitsController.updateValue(model.benefits);
     calculate();
   }
 
@@ -68,5 +68,13 @@ class CltController extends ChangeNotifier {
       inssPj: 0,
     );
     await StorageService.saveData(model);
+  }
+
+  @override
+  void dispose() {
+    cltSalaryController.dispose();
+    cltBenefitsController.dispose();
+    _debounce?.cancel();
+    super.dispose();
   }
 }

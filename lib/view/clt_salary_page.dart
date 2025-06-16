@@ -37,7 +37,7 @@ class _CltpageState extends State<Cltpage> {
       body: Responsive(
         mobile: _buildContent(
           context,
-          maxWidth: 360,
+          maxWidth: 320,
           padding: 20,
           minHeight: 550,
         ),
@@ -77,28 +77,31 @@ Widget _buildContent(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Padding(
           padding: EdgeInsets.all(padding),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                InputField(
-                  label: 'salary_clt'.tr(),
-                  controller: controller.salaryController,
-                  validator: (v) => null,
-                  icon: Icons.work,
-                  maxWidth: maxWidth,
-                  onChanged: (_) => controller.calculateDebounced(),
-                ),
-                InputField(
-                  label: 'benefits_clt'.tr(),
-                  controller: controller.benefitsController,
-                  validator: (v) => null,
-                  icon: Icons.card_giftcard,
-                  maxWidth: maxWidth,
-                  onChanged: (_) => controller.calculateDebounced(),
-                ),
-                const SizedBox(height: 20),
-                const CltChart(),
-              ],
+          child: GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  InputField(
+                    label: 'salary_clt'.tr(),
+                    controller: controller.cltSalaryController,
+                    validator: (v) => null,
+                    icon: Icons.work,
+                    maxWidth: maxWidth,
+                    onChanged: (_) => controller.calculateDebounced(),
+                  ),
+                  InputField(
+                    label: 'benefits_clt'.tr(),
+                    controller: controller.cltBenefitsController,
+                    validator: (v) => null,
+                    icon: Icons.card_giftcard,
+                    maxWidth: maxWidth,
+                    onChanged: (_) => controller.calculateDebounced(),
+                  ),
+                  const SizedBox(height: 20),
+                  const CltChart(),
+                ],
+              ),
             ),
           ),
         ),

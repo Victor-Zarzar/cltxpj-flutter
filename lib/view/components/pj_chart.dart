@@ -25,7 +25,7 @@ class PjChart extends StatelessWidget {
         final notifier = context.watch<UiProvider>();
         if (!ctrl.showChart) {
           return Padding(
-            padding: const EdgeInsets.only(top: 100),
+            padding: const EdgeInsets.only(top: 50),
             child: Column(
               children: <Widget>[
                 Text(
