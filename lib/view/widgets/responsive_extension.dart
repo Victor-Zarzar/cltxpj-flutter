@@ -35,7 +35,8 @@ extension ResponsiveTextStyle on BuildContext {
   );
 
   TextStyle get bodySmall => GoogleFonts.roboto(
-    fontSize: ResponsiveText.getSize(this, 12),
+    fontSize: ResponsiveText.getSize(this, 11),
+    fontWeight: FontWeight.w700,
     color: TextColor.primaryColor,
   );
 

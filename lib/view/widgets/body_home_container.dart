@@ -52,91 +52,78 @@ class BodyContainer extends StatelessWidget {
             child: Center(
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight: minHeight,
                   maxWidth: maxWidth,
+                  minHeight: minHeight,
                 ),
-                child: Card(
-                  color:
-                      notifier.isDark
-                          ? CardColor.thirdColor
-                          : CardColor.secondaryColor,
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(padding),
-                    child: Form(
-                      key: formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          InputField(
-                            label: 'salary_clt'.tr(),
-                            controller: salaryCltController,
-                            validator: validator,
-                            icon: Icons.money,
-                            maxWidth: maxWidth,
-                            prefix: Text('R\$ ', style: context.bodySmall),
-                            onChanged:
-                                (_) => formatCurrency(salaryCltController),
-                          ),
-                          InputField(
-                            label: 'salary_pj'.tr(),
-                            controller: salaryPjController,
-                            validator: validator,
-                            icon: Icons.money,
-                            maxWidth: maxWidth,
-                            prefix: Text('R\$ ', style: context.bodySmall),
-                            onChanged:
-                                (_) => formatCurrency(salaryPjController),
-                          ),
-                          InputField(
-                            label: 'benefits_clt'.tr(),
-                            controller: benefitsController,
-                            validator: validator,
-                            icon: Icons.card_giftcard,
-                            maxWidth: maxWidth,
-                            prefix: Text('R\$ ', style: context.bodySmall),
-                            onChanged:
-                                (_) => formatCurrency(benefitsController),
-                          ),
-                          InputField(
-                            label: 'accountant_fee'.tr(),
-                            controller: accountantFeeController,
-                            validator: validator,
-                            icon: Icons.receipt,
-                            maxWidth: maxWidth,
-                            prefix: Text('R\$ ', style: context.bodySmall),
-                            onChanged:
-                                (_) => formatCurrency(accountantFeeController),
-                          ),
-                          InputField(
-                            label: 'inss_pj'.tr(),
-                            controller: inssPjController,
-                            validator: validator,
-                            icon: Icons.percent,
-                            maxWidth: maxWidth,
-                          ),
-                          InputField(
-                            label: 'taxes_pj'.tr(),
-                            controller: taxesPjController,
-                            validator: validator,
-                            icon: Icons.percent,
-                            maxWidth: maxWidth,
-                          ),
-                          const SizedBox(height: 20),
-                          CustomButton(
-                            maxWidth: maxWidth,
-                            color:
-                                notifier.isDark
-                                    ? ButtonColor.fourthColor
-                                    : ButtonColor.primaryColor,
-                            onPressed: onCalculatePressed,
-                            text: 'calculate'.tr(),
-                          ),
-                        ],
-                      ),
+                child: Padding(
+                  padding: EdgeInsets.all(padding),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        InputField(
+                          label: 'salary_clt'.tr(),
+                          controller: salaryCltController,
+                          validator: validator,
+                          icon: Icons.money,
+                          maxWidth: maxWidth,
+                          prefix: Text('R\$ ', style: context.bodySmall),
+                          onChanged: (_) => formatCurrency(salaryCltController),
+                        ),
+                        InputField(
+                          label: 'salary_pj'.tr(),
+                          controller: salaryPjController,
+                          validator: validator,
+                          icon: Icons.money,
+                          maxWidth: maxWidth,
+                          prefix: Text('R\$ ', style: context.bodySmall),
+                          onChanged: (_) => formatCurrency(salaryPjController),
+                        ),
+                        InputField(
+                          label: 'benefits_clt'.tr(),
+                          controller: benefitsController,
+                          validator: validator,
+                          icon: Icons.card_giftcard,
+                          maxWidth: maxWidth,
+                          prefix: Text('R\$ ', style: context.bodySmall),
+                          onChanged: (_) => formatCurrency(benefitsController),
+                        ),
+                        InputField(
+                          label: 'accountant_fee'.tr(),
+                          controller: accountantFeeController,
+                          validator: validator,
+                          icon: Icons.receipt,
+                          maxWidth: maxWidth,
+                          prefix: Text('R\$ ', style: context.bodySmall),
+                          onChanged:
+                              (_) => formatCurrency(accountantFeeController),
+                        ),
+                        InputField(
+                          label: 'inss_pj'.tr(),
+                          controller: inssPjController,
+                          validator: validator,
+                          icon: Icons.percent,
+                          maxWidth: maxWidth,
+                        ),
+                        InputField(
+                          label: 'taxes_pj'.tr(),
+                          controller: taxesPjController,
+                          validator: validator,
+                          icon: Icons.percent,
+                          maxWidth: maxWidth,
+                        ),
+                        const SizedBox(height: 20),
+                        CustomButton(
+                          maxWidth: maxWidth,
+                          color:
+                              notifier.isDark
+                                  ? ButtonColor.fourthColor
+                                  : ButtonColor.primaryColor,
+                          onPressed: onCalculatePressed,
+                          text: 'calculate'.tr(),
+                        ),
+                      ],
                     ),
                   ),
                 ),

@@ -21,15 +21,15 @@ double calculateIrrf(double grossSalary) {
   final inss = calculateInss(grossSalary);
   final base = grossSalary - inss;
 
-  if (base <= 2428.80) {
+  if (base <= 3036.00) {
     return 0.0;
-  } else if (base <= 2826.65) {
-    return (base * 0.075) - 182.16;
-  } else if (base <= 3751.05) {
-    return (base * 0.15) - 394.16;
-  } else if (base <= 4664.68) {
-    return (base * 0.225) - 675.49;
+  } else if (base <= 4214.12) {
+    return (base * 0.075) - 227.70;
+  } else if (base <= 5282.45) {
+    return (base * 0.15) - 556.02;
+  } else if (base <= 6765.66) {
+    return (base * 0.225) - 922.57;
   } else {
-    return (base * 0.275) - 908.73;
+    return (base * 0.275) - 1265.98;
   }
 }

@@ -37,7 +37,7 @@ class _PjpageState extends State<Pjpage> {
       body: Responsive(
         mobile: _buildContent(
           context,
-          maxWidth: 320,
+          maxWidth: 350,
           padding: 20,
           minHeight: 550,
         ),
@@ -64,61 +64,52 @@ class _PjpageState extends State<Pjpage> {
     required double minHeight,
   }) {
     final controller = context.read<PjController>();
-    final notifier = Provider.of<UiProvider>(context);
 
     return Center(
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: maxWidth, minHeight: minHeight),
-        child: Card(
-          color:
-              notifier.isDark ? CardColor.thirdColor : CardColor.secondaryColor,
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(padding),
-            child: GestureDetector(
-              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    InputField(
-                      label: 'salary_pj'.tr(),
-                      controller: controller.salaryController,
-                      validator: (v) => null,
-                      icon: Icons.business,
-                      maxWidth: maxWidth,
-                      onChanged: (_) => controller.calculateDebounced(),
-                    ),
-                    InputField(
-                      label: 'taxes_pj'.tr(),
-                      controller: controller.taxController,
-                      validator: (v) => null,
-                      icon: Icons.percent,
-                      maxWidth: maxWidth,
-                      onChanged: (_) => controller.calculateDebounced(),
-                    ),
-                    InputField(
-                      label: 'accountant_fee'.tr(),
-                      controller: controller.accountantController,
-                      validator: (v) => null,
-                      icon: Icons.receipt_long,
-                      maxWidth: maxWidth,
-                      onChanged: (_) => controller.calculateDebounced(),
-                    ),
-                    InputField(
-                      label: 'inss_pj'.tr(),
-                      controller: controller.inssController,
-                      validator: (v) => null,
-                      icon: Icons.shield,
-                      maxWidth: maxWidth,
-                      onChanged: (_) => controller.calculateDebounced(),
-                    ),
-                    const SizedBox(height: 0),
-                    const PjChart(),
-                  ],
-                ),
+        child: Padding(
+          padding: EdgeInsets.all(padding),
+          child: GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  InputField(
+                    label: 'salary_pj'.tr(),
+                    controller: controller.salaryController,
+                    validator: (v) => null,
+                    icon: Icons.business,
+                    maxWidth: maxWidth,
+                    onChanged: (_) => controller.calculateDebounced(),
+                  ),
+                  InputField(
+                    label: 'taxes_pj'.tr(),
+                    controller: controller.taxController,
+                    validator: (v) => null,
+                    icon: Icons.percent,
+                    maxWidth: maxWidth,
+                    onChanged: (_) => controller.calculateDebounced(),
+                  ),
+                  InputField(
+                    label: 'accountant_fee'.tr(),
+                    controller: controller.accountantController,
+                    validator: (v) => null,
+                    icon: Icons.receipt_long,
+                    maxWidth: maxWidth,
+                    onChanged: (_) => controller.calculateDebounced(),
+                  ),
+                  InputField(
+                    label: 'inss_pj'.tr(),
+                    controller: controller.inssController,
+                    validator: (v) => null,
+                    icon: Icons.shield,
+                    maxWidth: maxWidth,
+                    onChanged: (_) => controller.calculateDebounced(),
+                  ),
+                  const SizedBox(height: 0),
+                  const PjChart(),
+                ],
               ),
             ),
           ),

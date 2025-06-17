@@ -37,7 +37,7 @@ class _CltpageState extends State<Cltpage> {
       body: Responsive(
         mobile: _buildContent(
           context,
-          maxWidth: 320,
+          maxWidth: 350,
           padding: 20,
           minHeight: 550,
         ),
@@ -65,43 +65,36 @@ Widget _buildContent(
   required double minHeight,
 }) {
   final controller = context.read<CltController>();
-  final notifier = Provider.of<UiProvider>(context);
 
   return Center(
     child: ConstrainedBox(
       constraints: BoxConstraints(maxWidth: maxWidth, minHeight: minHeight),
-      child: Card(
-        color:
-            notifier.isDark ? CardColor.thirdColor : CardColor.secondaryColor,
-        elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Padding(
-          padding: EdgeInsets.all(padding),
-          child: GestureDetector(
-            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  InputField(
-                    label: 'salary_clt'.tr(),
-                    controller: controller.cltSalaryController,
-                    validator: (v) => null,
-                    icon: Icons.work,
-                    maxWidth: maxWidth,
-                    onChanged: (_) => controller.calculateDebounced(),
-                  ),
-                  InputField(
-                    label: 'benefits_clt'.tr(),
-                    controller: controller.cltBenefitsController,
-                    validator: (v) => null,
-                    icon: Icons.card_giftcard,
-                    maxWidth: maxWidth,
-                    onChanged: (_) => controller.calculateDebounced(),
-                  ),
-                  const SizedBox(height: 20),
-                  const CltChart(),
-                ],
-              ),
+      child: Padding(
+        padding: EdgeInsets.all(padding),
+        child: GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                InputField(
+                  label: 'salary_clt'.tr(),
+                  controller: controller.cltSalaryController,
+                  validator: (v) => null,
+                  icon: Icons.work,
+                  maxWidth: maxWidth,
+                  onChanged: (_) => controller.calculateDebounced(),
+                ),
+                InputField(
+                  label: 'benefits_clt'.tr(),
+                  controller: controller.cltBenefitsController,
+                  validator: (v) => null,
+                  icon: Icons.card_giftcard,
+                  maxWidth: maxWidth,
+                  onChanged: (_) => controller.calculateDebounced(),
+                ),
+                const SizedBox(height: 20),
+                const CltChart(),
+              ],
             ),
           ),
         ),

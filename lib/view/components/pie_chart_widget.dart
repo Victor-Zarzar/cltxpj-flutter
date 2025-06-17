@@ -95,7 +95,7 @@ class Indicator extends StatelessWidget {
               decoration: BoxDecoration(shape: BoxShape.circle, color: color),
             ),
             const SizedBox(width: 6),
-            Text(text, style: context.bodySmallDark),
+            Text(text, style: context.bodySmall),
           ],
         );
       },
