@@ -18,13 +18,13 @@ class PjController extends ChangeNotifier {
     initialValue: 189.0,
   );
 
-  final taxController = TextEditingController(text: '10');
-  final inssController = TextEditingController(text: '11');
+  final taxController = TextEditingController();
+  final inssController = TextEditingController();
 
   double netSalary = 0.0;
   double tax = 0.0;
-  double accountantFee = 0.0;
-  double inss = 0.0;
+  double accountantFee = 189.0;
+  double inss = 0.11;
 
   bool showChart = false;
   Timer? _debounce;

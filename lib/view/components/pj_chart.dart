@@ -2,6 +2,7 @@ import 'package:cltxpj/controller/calculate_controller.dart';
 import 'package:cltxpj/controller/pj_controller.dart';
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
+import 'package:cltxpj/utils/chart_pj_data_helper.dart';
 import 'package:cltxpj/view/components/pie_chart_widget.dart';
 import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -23,6 +24,7 @@ class PjChart extends StatelessWidget {
     return Consumer<PjController>(
       builder: (context, ctrl, _) {
         final notifier = context.watch<UiProvider>();
+
         if (!ctrl.showChart) {
           return Padding(
             padding: const EdgeInsets.only(top: 50),
@@ -47,6 +49,13 @@ class PjChart extends StatelessWidget {
           );
         }
 
+        final chartData = PjChartDataHelper.buildResultChartData(
+          tax: ctrl.tax,
+          inss: ctrl.inss,
+          accountantFee: ctrl.accountantFee,
+          netSalary: ctrl.netSalary,
+        );
+
         return Column(
           children: [
             Text(
@@ -54,16 +63,7 @@ class PjChart extends StatelessWidget {
               style: context.h1,
             ),
             const SizedBox(height: 0),
-            PieChartWidget(
-              dataMap: {
-                'taxes'.tr(): ctrl.tax,
-                'accountant'.tr(): ctrl.accountantFee,
-                'inss'.tr(): ctrl.inss,
-                'net'.tr(): ctrl.netSalary,
-              },
-              colorList: colorList,
-              size: 180,
-            ),
+            PieChartWidget(dataMap: chartData, colorList: colorList, size: 180),
           ],
         );
       },

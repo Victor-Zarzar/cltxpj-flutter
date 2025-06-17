@@ -2,6 +2,7 @@ import 'package:cltxpj/controller/calculate_controller.dart';
 import 'package:cltxpj/controller/clt_controller.dart';
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
+import 'package:cltxpj/utils/chart_clt_data_helper.dart';
 import 'package:cltxpj/view/components/pie_chart_widget.dart';
 import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -23,6 +24,7 @@ class CltChart extends StatelessWidget {
     return Consumer<CltController>(
       builder: (context, ctrl, _) {
         final notifier = context.watch<UiProvider>();
+
         if (!ctrl.showChart) {
           return Padding(
             padding: const EdgeInsets.only(top: 100),
@@ -47,6 +49,13 @@ class CltChart extends StatelessWidget {
           );
         }
 
+        final chartData = CltChartDataHelper.buildResultChartData(
+          netSalary: ctrl.netSalary,
+          inss: ctrl.inss,
+          irrf: ctrl.irrf,
+          benefits: ctrl.benefits,
+        );
+
         return Column(
           children: [
             Text(
@@ -54,16 +63,7 @@ class CltChart extends StatelessWidget {
               style: context.h1,
             ),
             const SizedBox(height: 20),
-            PieChartWidget(
-              dataMap: {
-                'inss'.tr(): ctrl.inss,
-                'irrf'.tr(): ctrl.irrf,
-                'benefits'.tr(): ctrl.benefits,
-                'net'.tr(): ctrl.netSalary,
-              },
-              colorList: colorList,
-              size: 180,
-            ),
+            PieChartWidget(dataMap: chartData, colorList: colorList, size: 180),
           ],
         );
       },
