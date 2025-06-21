@@ -26,8 +26,7 @@ class PjController extends ChangeNotifier {
   double accountantFee = 189.0;
   double inss = 0.11;
 
-  bool showChart = false;
-  Timer? _debounce;
+  bool get hasValidInput => netSalary > 0 && tax > 0 && inss > 0;
 
   PjController() {
     _loadData();
@@ -47,18 +46,8 @@ class PjController extends ChangeNotifier {
     final totalDiscount = tax + inss + accountantFee;
     netSalary = salary - totalDiscount;
 
-    showChart =
-        salary > 0 && accountantFee > 0 && taxPercent >= 0 && inssPercent >= 0;
-
     _saveData(salary, taxPercent, accountantFee, inssPercent);
     notifyListeners();
-  }
-
-  void calculateDebounced() {
-    if (_debounce?.isActive ?? false) _debounce!.cancel();
-    _debounce = Timer(const Duration(milliseconds: 800), () {
-      calculate();
-    });
   }
 
   Future<void> _loadData() async {

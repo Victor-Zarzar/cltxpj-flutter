@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 class InputField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
-  final String? Function(String?)? validator;
   final IconData icon;
   final double? maxWidth;
   final void Function(String)? onChanged;
@@ -22,7 +21,6 @@ class InputField extends StatelessWidget {
     super.key,
     required this.label,
     required this.controller,
-    required this.validator,
     required this.icon,
     this.maxWidth,
     this.onChanged,
@@ -46,7 +44,6 @@ class InputField extends StatelessWidget {
               ),
               child: TextFormField(
                 controller: controller,
-                validator: validator,
                 keyboardType: keyboardType,
                 obscureText: obscureText,
                 inputFormatters: [

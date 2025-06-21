@@ -1,8 +1,11 @@
 import 'package:cltxpj/controller/clt_controller.dart';
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
-import 'package:cltxpj/view/components/clt_chart.dart';
+import 'package:cltxpj/utils/currency_format_helper.dart';
+import 'package:cltxpj/view/components/custom_button.dart';
+import 'package:cltxpj/view/components/result_clt_dialog.dart';
 import 'package:cltxpj/view/components/input_field.dart';
+import 'package:cltxpj/view/components/show_dialog_error.dart';
 import 'package:cltxpj/view/widgets/responsive.dart';
 import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -64,41 +67,64 @@ Widget _buildContent(
   required double padding,
   required double minHeight,
 }) {
-  final controller = context.read<CltController>();
+  return Consumer2<UiProvider, CltController>(
+    builder: (context, notifier, controller, child) {
+      return Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: maxWidth, minHeight: minHeight),
+          child: Padding(
+            padding: EdgeInsets.all(padding),
+            child: GestureDetector(
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    InputField(
+                      label: 'salary_clt'.tr(),
+                      controller: controller.cltSalaryController,
+                      icon: Icons.work,
+                      maxWidth: maxWidth,
+                      onChanged: (_) => controller.calculate(),
+                    ),
+                    InputField(
+                      label: 'benefits_clt'.tr(),
+                      controller: controller.cltBenefitsController,
+                      icon: Icons.card_giftcard,
+                      maxWidth: maxWidth,
+                      onChanged: (_) => controller.calculate(),
+                    ),
+                    const SizedBox(height: 20),
+                    CustomButton(
+                      animatedGradient: true,
+                      fullWidth: true,
+                      height: 42,
+                      maxWidth: maxWidth,
+                      color:
+                          notifier.isDark
+                              ? ButtonColor.fourthColor
+                              : ButtonColor.primaryColor,
+                      onPressed: () {
+                        final controller = context.read<CltController>();
 
-  return Center(
-    child: ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: maxWidth, minHeight: minHeight),
-      child: Padding(
-        padding: EdgeInsets.all(padding),
-        child: GestureDetector(
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                InputField(
-                  label: 'salary_clt'.tr(),
-                  controller: controller.cltSalaryController,
-                  validator: (v) => null,
-                  icon: Icons.work,
-                  maxWidth: maxWidth,
-                  onChanged: (_) => controller.calculateDebounced(),
+                        if (controller.hasValidInput) {
+                          ResultCltDialog.show(context, currencyFormat);
+                        } else {
+                          ShowDialogError.show(
+                            context,
+                            title: 'error'.tr(),
+                            child: Text('fill_fields_to_see_chart'.tr()),
+                          );
+                        }
+                      },
+                      text: 'calculate'.tr(),
+                    ),
+                  ],
                 ),
-                InputField(
-                  label: 'benefits_clt'.tr(),
-                  controller: controller.cltBenefitsController,
-                  validator: (v) => null,
-                  icon: Icons.card_giftcard,
-                  maxWidth: maxWidth,
-                  onChanged: (_) => controller.calculateDebounced(),
-                ),
-                const SizedBox(height: 20),
-                const CltChart(),
-              ],
+              ),
             ),
           ),
         ),
-      ),
-    ),
+      );
+    },
   );
 }

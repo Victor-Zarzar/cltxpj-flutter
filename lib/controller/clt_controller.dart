@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:cltxpj/utils/salary_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
@@ -23,8 +22,7 @@ class CltController extends ChangeNotifier {
   double irrf = 0.0;
   double benefits = 0.0;
 
-  bool showChart = false;
-  Timer? _debounce;
+  bool get hasValidInput => netSalary > 0 && benefits > 0;
 
   CltController() {
     _loadData();
@@ -38,17 +36,8 @@ class CltController extends ChangeNotifier {
     irrf = calculateIrrf(salary);
     netSalary = salary - inss - irrf + benefits;
 
-    showChart = salary > 0 || benefits > 0;
-
     _saveData(salary, benefits);
     notifyListeners();
-  }
-
-  void calculateDebounced() {
-    _debounce?.cancel();
-    _debounce = Timer(const Duration(milliseconds: 800), () {
-      calculate();
-    });
   }
 
   Future<void> _loadData() async {
@@ -74,7 +63,6 @@ class CltController extends ChangeNotifier {
   void dispose() {
     cltSalaryController.dispose();
     cltBenefitsController.dispose();
-    _debounce?.cancel();
     super.dispose();
   }
 }

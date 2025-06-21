@@ -1,8 +1,9 @@
+import 'package:cltxpj/controller/calculate_controller.dart';
 import 'package:cltxpj/features/app_theme.dart';
 import 'package:cltxpj/features/theme_provider.dart';
 import 'package:cltxpj/view/components/custom_button.dart';
 import 'package:cltxpj/view/components/input_field.dart';
-import 'package:cltxpj/view/widgets/responsive_extension.dart';
+import 'package:cltxpj/view/components/show_dialog_error.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,9 +16,6 @@ class BodyContainer extends StatelessWidget {
   final TextEditingController taxesPjController;
   final TextEditingController accountantFeeController;
   final TextEditingController inssPjController;
-  final Function(TextEditingController) formatCurrency;
-  final Function(String) parseCurrency;
-  final String? Function(String?) validator;
   final VoidCallback onCalculatePressed;
   final double padding;
   final double minHeight;
@@ -32,9 +30,6 @@ class BodyContainer extends StatelessWidget {
     required this.taxesPjController,
     required this.accountantFeeController,
     required this.inssPjController,
-    required this.formatCurrency,
-    required this.parseCurrency,
-    required this.validator,
     required this.onCalculatePressed,
     required this.padding,
     required this.minHeight,
@@ -43,6 +38,7 @@ class BodyContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.read<CalculatorController>();
     return Consumer<UiProvider>(
       builder: (context, notifier, child) {
         return GestureDetector(
@@ -64,63 +60,69 @@ class BodyContainer extends StatelessWidget {
                       children: [
                         InputField(
                           label: 'salary_clt'.tr(),
-                          controller: salaryCltController,
-                          validator: validator,
+                          controller: controller.salaryCltController,
                           icon: Icons.money,
                           maxWidth: maxWidth,
-                          prefix: Text('R\$ ', style: context.bodySmall),
-                          onChanged: (_) => formatCurrency(salaryCltController),
+                          onChanged: (_) => controller.calculate(),
                         ),
                         InputField(
                           label: 'salary_pj'.tr(),
-                          controller: salaryPjController,
-                          validator: validator,
+                          controller: controller.salaryPjController,
                           icon: Icons.money,
                           maxWidth: maxWidth,
-                          prefix: Text('R\$ ', style: context.bodySmall),
-                          onChanged: (_) => formatCurrency(salaryPjController),
+                          onChanged: (_) => controller.calculate(),
                         ),
                         InputField(
                           label: 'benefits_clt'.tr(),
                           controller: benefitsController,
-                          validator: validator,
                           icon: Icons.card_giftcard,
                           maxWidth: maxWidth,
-                          prefix: Text('R\$ ', style: context.bodySmall),
-                          onChanged: (_) => formatCurrency(benefitsController),
+                          onChanged: (_) => controller.calculate(),
                         ),
                         InputField(
                           label: 'accountant_fee'.tr(),
-                          controller: accountantFeeController,
-                          validator: validator,
+                          controller: controller.accountantFeeController,
                           icon: Icons.receipt,
                           maxWidth: maxWidth,
-                          prefix: Text('R\$ ', style: context.bodySmall),
-                          onChanged:
-                              (_) => formatCurrency(accountantFeeController),
+                          onChanged: (_) => controller.calculate(),
                         ),
                         InputField(
                           label: 'inss_pj'.tr(),
-                          controller: inssPjController,
-                          validator: validator,
+                          controller: controller.inssPjController,
                           icon: Icons.percent,
                           maxWidth: maxWidth,
+                          onChanged: (_) => controller.calculate(),
                         ),
                         InputField(
                           label: 'taxes_pj'.tr(),
-                          controller: taxesPjController,
-                          validator: validator,
+                          controller: controller.taxesPjController,
                           icon: Icons.percent,
                           maxWidth: maxWidth,
+                          onChanged: (_) => controller.calculate(),
                         ),
                         const SizedBox(height: 20),
                         CustomButton(
+                          animatedGradient: true,
+                          fullWidth: true,
+                          height: 42,
                           maxWidth: maxWidth,
                           color:
                               notifier.isDark
                                   ? ButtonColor.fourthColor
                                   : ButtonColor.primaryColor,
-                          onPressed: onCalculatePressed,
+                          onPressed: () {
+                            final controller =
+                                context.read<CalculatorController>();
+                            if (!controller.hasValidInput) {
+                              ShowDialogError.show(
+                                context,
+                                title: 'error'.tr(),
+                                child: Text('fill_fields_to_see_chart'.tr()),
+                              );
+                              return;
+                            }
+                            onCalculatePressed();
+                          },
                           text: 'calculate'.tr(),
                         ),
                       ],

@@ -1,29 +1,60 @@
-import 'package:cltxpj/model/calculate_model.dart';
-import 'package:cltxpj/utils/salary_helper.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:easy_localization/easy_localization.dart';
+import '../model/calculate_model.dart';
+import '../utils/salary_helper.dart';
 import '../services/storage_service.dart';
 
-final currencyFormat = NumberFormat.currency(
-  locale: 'pt_BR',
-  symbol: '',
-  decimalDigits: 2,
-);
-
-final benefitsController = MoneyMaskedTextController(
-  leftSymbol: 'R\$ ',
-  decimalSeparator: ',',
-  thousandSeparator: '.',
-);
-
 class CalculatorController extends ChangeNotifier {
+  final salaryCltController = MoneyMaskedTextController(
+    leftSymbol: 'R\$ ',
+    decimalSeparator: ',',
+    thousandSeparator: '.',
+  );
+
+  final benefitsController = MoneyMaskedTextController(
+    leftSymbol: 'R\$ ',
+    decimalSeparator: ',',
+    thousandSeparator: '.',
+  );
+
+  final salaryPjController = MoneyMaskedTextController(
+    leftSymbol: 'R\$ ',
+    decimalSeparator: ',',
+    thousandSeparator: '.',
+  );
+
+  final taxesPjController = MoneyMaskedTextController(
+    leftSymbol: '',
+    decimalSeparator: ',',
+    thousandSeparator: '.',
+  );
+
+  final accountantFeeController = MoneyMaskedTextController(
+    leftSymbol: 'R\$ ',
+    decimalSeparator: ',',
+    thousandSeparator: '.',
+  );
+
+  final inssPjController = MoneyMaskedTextController(
+    leftSymbol: '',
+    decimalSeparator: ',',
+    thousandSeparator: '.',
+  );
+
   CalculatorModel model = CalculatorModel(
     salaryClt: 0,
     salaryPj: 0,
     benefits: 0,
     taxesPj: 0,
+    accountantFee: 189.0,
+    inssPj: 0.11,
   );
+
+  bool get hasValidInput {
+    return salaryCltController.numberValue > 0 ||
+        benefitsController.numberValue > 0;
+  }
 
   double get totalClt {
     final inss = calculateInss(model.salaryClt);
@@ -35,11 +66,7 @@ class CalculatorController extends ChangeNotifier {
     final taxPj = model.salaryPj * (model.taxesPj / 100);
     final inss = model.salaryPj * model.inssPj;
     final accountantFee = model.accountantFee;
-
-    final totalDiscounts = taxPj + inss + accountantFee;
-    final netPj = model.salaryPj - totalDiscounts;
-
-    return netPj;
+    return model.salaryPj - (taxPj + inss + accountantFee);
   }
 
   String get bestOption {
@@ -59,21 +86,14 @@ class CalculatorController extends ChangeNotifier {
     }
   }
 
-  void updateValues({
-    required double salaryClt,
-    required double salaryPj,
-    required double benefits,
-    required double taxesPj,
-    double accountantFee = 189.0,
-    double inssPj = 0.11,
-  }) {
+  void updateValues() {
     model = CalculatorModel(
-      salaryClt: salaryClt,
-      salaryPj: salaryPj,
-      benefits: benefits,
-      taxesPj: taxesPj,
-      accountantFee: accountantFee,
-      inssPj: inssPj,
+      salaryClt: salaryCltController.numberValue,
+      salaryPj: salaryPjController.numberValue,
+      benefits: benefitsController.numberValue,
+      taxesPj: taxesPjController.numberValue,
+      accountantFee: accountantFeeController.numberValue,
+      inssPj: inssPjController.numberValue / 100,
     );
     StorageService.saveData(model);
     notifyListeners();
@@ -81,6 +101,23 @@ class CalculatorController extends ChangeNotifier {
 
   Future<void> loadData() async {
     model = await StorageService.loadData();
+    salaryCltController.updateValue(model.salaryClt);
+    salaryPjController.updateValue(model.salaryPj);
+    benefitsController.updateValue(model.benefits);
+    taxesPjController.updateValue(model.taxesPj);
+    accountantFeeController.updateValue(model.accountantFee);
+    inssPjController.updateValue(model.inssPj * 100);
     notifyListeners();
+  }
+
+  void calculate() => updateValues();
+
+  void disposeAll() {
+    salaryCltController.dispose();
+    salaryPjController.dispose();
+    benefitsController.dispose();
+    taxesPjController.dispose();
+    accountantFeeController.dispose();
+    inssPjController.dispose();
   }
 }
