@@ -32,7 +32,7 @@ class ThemePage extends StatelessWidget {
         centerTitle: true,
         backgroundColor:
             notifier.isDark
-                ? AppBarColor.fourthColor
+                ? AppBarColor.thirdColor
                 : AppBarColor.secondaryColor,
       ),
       body: Padding(

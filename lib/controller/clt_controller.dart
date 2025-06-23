@@ -22,7 +22,7 @@ class CltController extends ChangeNotifier {
   double irrf = 0.0;
   double benefits = 0.0;
 
-  bool get hasValidInput => netSalary > 0 && benefits > 0;
+  bool get hasValidInput => netSalary > 0;
 
   CltController() {
     _loadData();

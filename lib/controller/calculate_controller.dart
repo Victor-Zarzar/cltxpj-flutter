@@ -51,10 +51,10 @@ class CalculatorController extends ChangeNotifier {
     inssPj: 0.11,
   );
 
-  bool get hasValidInput {
-    return salaryCltController.numberValue > 0 ||
-        benefitsController.numberValue > 0;
-  }
+  bool get hasValidInput =>
+      salaryCltController.numberValue > 0 &&
+      inssPjController.numberValue > 0 &&
+      taxesPjController.numberValue > 0;
 
   double get totalClt {
     final inss = calculateInss(model.salaryClt);

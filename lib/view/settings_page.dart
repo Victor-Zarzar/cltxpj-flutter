@@ -30,7 +30,7 @@ class _SettingsPageState extends State<SettingsPage> {
           appBar: AppBar(
             backgroundColor:
                 notifier.isDark
-                    ? AppBarColor.fourthColor
+                    ? AppBarColor.thirdColor
                     : AppBarColor.secondaryColor,
             automaticallyImplyLeading: false,
             centerTitle: true,

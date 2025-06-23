@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
             centerTitle: true,
             backgroundColor:
                 notifier.isDark
-                    ? AppBarColor.fourthColor
+                    ? AppBarColor.thirdColor
                     : AppBarColor.secondaryColor,
             title: Text('app_bar_title'.tr(), style: context.h1),
           ),
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
     return Responsive(
       mobile: _buildContent(
         context,
-        maxWidth: 320,
+        maxWidth: 370,
         padding: 20,
         minHeight: 550,
       ),

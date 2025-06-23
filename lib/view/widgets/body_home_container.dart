@@ -41,11 +41,11 @@ class BodyContainer extends StatelessWidget {
     final controller = context.read<CalculatorController>();
     return Consumer<UiProvider>(
       builder: (context, notifier, child) {
-        return GestureDetector(
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: SingleChildScrollView(
-            padding: EdgeInsets.all(padding),
-            child: Center(
+        return Center(
+          child: GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(padding),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
                   maxWidth: maxWidth,
@@ -58,47 +58,76 @@ class BodyContainer extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        InputField(
-                          label: 'salary_clt'.tr(),
-                          controller: controller.salaryCltController,
-                          icon: Icons.money,
-                          maxWidth: maxWidth,
-                          onChanged: (_) => controller.calculate(),
-                        ),
-                        InputField(
-                          label: 'salary_pj'.tr(),
-                          controller: controller.salaryPjController,
-                          icon: Icons.money,
-                          maxWidth: maxWidth,
-                          onChanged: (_) => controller.calculate(),
-                        ),
-                        InputField(
-                          label: 'benefits_clt'.tr(),
-                          controller: benefitsController,
-                          icon: Icons.card_giftcard,
-                          maxWidth: maxWidth,
-                          onChanged: (_) => controller.calculate(),
-                        ),
-                        InputField(
-                          label: 'accountant_fee'.tr(),
-                          controller: controller.accountantFeeController,
-                          icon: Icons.receipt,
-                          maxWidth: maxWidth,
-                          onChanged: (_) => controller.calculate(),
-                        ),
-                        InputField(
-                          label: 'inss_pj'.tr(),
-                          controller: controller.inssPjController,
-                          icon: Icons.percent,
-                          maxWidth: maxWidth,
-                          onChanged: (_) => controller.calculate(),
-                        ),
-                        InputField(
-                          label: 'taxes_pj'.tr(),
-                          controller: controller.taxesPjController,
-                          icon: Icons.percent,
-                          maxWidth: maxWidth,
-                          onChanged: (_) => controller.calculate(),
+                        Container(
+                          decoration: BoxDecoration(
+                            color:
+                                notifier.isDark
+                                    ? CardColor.primaryColor
+                                    : CardColor.secondaryColor,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color:
+                                    notifier.isDark
+                                        ? Colors.black.withValues(alpha: 0.3)
+                                        : Colors.grey.withValues(alpha: 0.2),
+                                blurRadius: 20,
+                                offset: const Offset(0, 10),
+                                spreadRadius: 0,
+                              ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(24.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                InputField(
+                                  label: 'salary_clt'.tr(),
+                                  controller: controller.salaryCltController,
+                                  icon: Icons.attach_money_rounded,
+                                  maxWidth: maxWidth,
+                                  onChanged: (_) => controller.calculate(),
+                                ),
+                                InputField(
+                                  label: 'salary_pj'.tr(),
+                                  controller: controller.salaryPjController,
+                                  icon: Icons.business_center_rounded,
+                                  maxWidth: maxWidth,
+                                  onChanged: (_) => controller.calculate(),
+                                ),
+                                InputField(
+                                  label: 'benefits_clt'.tr(),
+                                  controller: benefitsController,
+                                  icon: Icons.card_giftcard_rounded,
+                                  maxWidth: maxWidth,
+                                  onChanged: (_) => controller.calculate(),
+                                ),
+                                InputField(
+                                  label: 'accountant_fee'.tr(),
+                                  controller:
+                                      controller.accountantFeeController,
+                                  icon: Icons.receipt_long_rounded,
+                                  maxWidth: maxWidth,
+                                  onChanged: (_) => controller.calculate(),
+                                ),
+                                InputField(
+                                  label: 'inss_pj'.tr(),
+                                  controller: controller.inssPjController,
+                                  icon: Icons.percent_rounded,
+                                  maxWidth: maxWidth,
+                                  onChanged: (_) => controller.calculate(),
+                                ),
+                                InputField(
+                                  label: 'taxes_pj'.tr(),
+                                  controller: controller.taxesPjController,
+                                  icon: Icons.account_balance_rounded,
+                                  maxWidth: maxWidth,
+                                  onChanged: (_) => controller.calculate(),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 20),
                         CustomButton(
@@ -113,6 +142,7 @@ class BodyContainer extends StatelessWidget {
                           onPressed: () {
                             final controller =
                                 context.read<CalculatorController>();
+
                             if (!controller.hasValidInput) {
                               ShowDialogError.show(
                                 context,

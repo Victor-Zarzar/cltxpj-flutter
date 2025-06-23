@@ -34,13 +34,13 @@ class _CltpageState extends State<Cltpage> {
         centerTitle: true,
         backgroundColor:
             notifier.isDark
-                ? AppBarColor.fourthColor
+                ? AppBarColor.thirdColor
                 : AppBarColor.secondaryColor,
       ),
       body: Responsive(
         mobile: _buildContent(
           context,
-          maxWidth: 350,
+          maxWidth: 370,
           padding: 20,
           minHeight: 550,
         ),
@@ -79,19 +79,46 @@ Widget _buildContent(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    InputField(
-                      label: 'salary_clt'.tr(),
-                      controller: controller.cltSalaryController,
-                      icon: Icons.work,
-                      maxWidth: maxWidth,
-                      onChanged: (_) => controller.calculate(),
-                    ),
-                    InputField(
-                      label: 'benefits_clt'.tr(),
-                      controller: controller.cltBenefitsController,
-                      icon: Icons.card_giftcard,
-                      maxWidth: maxWidth,
-                      onChanged: (_) => controller.calculate(),
+                    Container(
+                      decoration: BoxDecoration(
+                        color:
+                            notifier.isDark
+                                ? CardColor.primaryColor
+                                : CardColor.secondaryColor,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color:
+                                notifier.isDark
+                                    ? Colors.black.withValues(alpha: 0.3)
+                                    : Colors.grey.withValues(alpha: 0.2),
+                            blurRadius: 20,
+                            offset: const Offset(0, 10),
+                            spreadRadius: 0,
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: Column(
+                          children: [
+                            InputField(
+                              label: 'salary_clt'.tr(),
+                              controller: controller.cltSalaryController,
+                              icon: Icons.attach_money_rounded,
+                              maxWidth: maxWidth,
+                              onChanged: (_) => controller.calculate(),
+                            ),
+                            InputField(
+                              label: 'benefits_clt'.tr(),
+                              controller: controller.cltBenefitsController,
+                              icon: Icons.card_giftcard_rounded,
+                              maxWidth: maxWidth,
+                              onChanged: (_) => controller.calculate(),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 20),
                     CustomButton(

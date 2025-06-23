@@ -44,7 +44,7 @@ class _AboutPageState extends State<AboutPage> {
                     centerTitle: true,
                     backgroundColor:
                         notifier.isDark
-                            ? AppBarColor.fourthColor
+                            ? AppBarColor.thirdColor
                             : AppBarColor.secondaryColor,
                     title: Text("about".tr(), style: context.h1),
                   ),

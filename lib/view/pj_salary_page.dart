@@ -34,13 +34,13 @@ class _PjpageState extends State<Pjpage> {
         centerTitle: true,
         backgroundColor:
             notifier.isDark
-                ? AppBarColor.fourthColor
+                ? AppBarColor.thirdColor
                 : AppBarColor.secondaryColor,
       ),
       body: Responsive(
         mobile: _buildContent(
           context,
-          maxWidth: 350,
+          maxWidth: 370,
           padding: 20,
           minHeight: 550,
         ),
@@ -81,40 +81,66 @@ class _PjpageState extends State<Pjpage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      InputField(
-                        label: 'salary_pj'.tr(),
-                        controller: controller.salaryController,
-                        icon: Icons.business,
-                        maxWidth: maxWidth,
-                        onChanged: (_) => controller.calculate(),
-                      ),
-                      InputField(
-                        label: 'taxes_pj'.tr(),
-                        controller: controller.taxController,
-                        icon: Icons.percent,
-                        maxWidth: maxWidth,
-                        onChanged: (_) => controller.calculate(),
-                      ),
-                      InputField(
-                        label: 'accountant_fee'.tr(),
-                        controller: controller.accountantController,
-                        icon: Icons.receipt_long,
-                        maxWidth: maxWidth,
-                        onChanged: (_) => controller.calculate(),
-                      ),
-                      InputField(
-                        label: 'inss_pj'.tr(),
-                        controller: controller.inssController,
-                        icon: Icons.shield,
-                        maxWidth: maxWidth,
-                        onChanged: (_) => controller.calculate(),
+                      Container(
+                        decoration: BoxDecoration(
+                          color:
+                              notifier.isDark
+                                  ? CardColor.primaryColor
+                                  : CardColor.secondaryColor,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color:
+                                  notifier.isDark
+                                      ? Colors.black.withValues(alpha: 0.3)
+                                      : Colors.grey.withValues(alpha: 0.2),
+                              blurRadius: 20,
+                              offset: const Offset(0, 10),
+                              spreadRadius: 0,
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Column(
+                            children: [
+                              InputField(
+                                label: 'salary_pj'.tr(),
+                                controller: controller.salaryController,
+                                icon: Icons.business_center_rounded,
+                                maxWidth: maxWidth,
+                                onChanged: (_) => controller.calculate(),
+                              ),
+                              InputField(
+                                label: 'taxes_pj'.tr(),
+                                controller: controller.taxController,
+                                icon: Icons.account_balance_rounded,
+                                maxWidth: maxWidth,
+                                onChanged: (_) => controller.calculate(),
+                              ),
+                              InputField(
+                                label: 'accountant_fee'.tr(),
+                                controller: controller.accountantController,
+                                icon: Icons.receipt_long_rounded,
+                                maxWidth: maxWidth,
+                                onChanged: (_) => controller.calculate(),
+                              ),
+                              InputField(
+                                label: 'inss_pj'.tr(),
+                                controller: controller.inssController,
+                                icon: Icons.security_rounded,
+                                maxWidth: maxWidth,
+                                onChanged: (_) => controller.calculate(),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
                         animatedGradient: true,
                         fullWidth: true,
                         height: 42,
-
                         maxWidth: maxWidth,
                         color:
                             notifier.isDark
