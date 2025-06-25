@@ -1,3 +1,4 @@
+import 'package:cltxpj/view/widgets/responsive_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class ShowDialogError {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(ctx).pop(),
-              child: Text('close'.tr()),
+              child: Text('close'.tr(), style: context.bodySmallDarkBold),
             ),
           ],
         );

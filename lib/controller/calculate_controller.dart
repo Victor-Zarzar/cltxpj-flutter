@@ -12,20 +12,14 @@ class CalculatorController extends ChangeNotifier {
     thousandSeparator: '.',
   );
 
-  final benefitsController = MoneyMaskedTextController(
-    leftSymbol: 'R\$ ',
-    decimalSeparator: ',',
-    thousandSeparator: '.',
-  );
-
   final salaryPjController = MoneyMaskedTextController(
     leftSymbol: 'R\$ ',
     decimalSeparator: ',',
     thousandSeparator: '.',
   );
 
-  final taxesPjController = MoneyMaskedTextController(
-    leftSymbol: '',
+  final benefitsController = MoneyMaskedTextController(
+    leftSymbol: 'R\$ ',
     decimalSeparator: ',',
     thousandSeparator: '.',
   );
@@ -36,11 +30,8 @@ class CalculatorController extends ChangeNotifier {
     thousandSeparator: '.',
   );
 
-  final inssPjController = MoneyMaskedTextController(
-    leftSymbol: '',
-    decimalSeparator: ',',
-    thousandSeparator: '.',
-  );
+  final taxesPjController = TextEditingController();
+  final inssPjController = TextEditingController();
 
   CalculatorModel model = CalculatorModel(
     salaryClt: 0,
@@ -51,10 +42,14 @@ class CalculatorController extends ChangeNotifier {
     inssPj: 0.11,
   );
 
+  double _parsePercentage(TextEditingController controller) {
+    return double.tryParse(controller.text.replaceAll(',', '.')) ?? 0.0;
+  }
+
   bool get hasValidInput =>
       salaryCltController.numberValue > 0 &&
-      inssPjController.numberValue > 0 &&
-      taxesPjController.numberValue > 0;
+      _parsePercentage(inssPjController) > 0 &&
+      _parsePercentage(taxesPjController) > 0;
 
   double get totalClt {
     final inss = calculateInss(model.salaryClt);
@@ -65,8 +60,7 @@ class CalculatorController extends ChangeNotifier {
   double get totalPj {
     final taxPj = model.salaryPj * (model.taxesPj / 100);
     final inss = model.salaryPj * model.inssPj;
-    final accountantFee = model.accountantFee;
-    return model.salaryPj - (taxPj + inss + accountantFee);
+    return model.salaryPj - (taxPj + inss + model.accountantFee);
   }
 
   String get bestOption {
@@ -91,10 +85,11 @@ class CalculatorController extends ChangeNotifier {
       salaryClt: salaryCltController.numberValue,
       salaryPj: salaryPjController.numberValue,
       benefits: benefitsController.numberValue,
-      taxesPj: taxesPjController.numberValue,
       accountantFee: accountantFeeController.numberValue,
-      inssPj: inssPjController.numberValue / 100,
+      taxesPj: _parsePercentage(taxesPjController),
+      inssPj: _parsePercentage(inssPjController) / 100,
     );
+
     StorageService.saveData(model);
     notifyListeners();
   }
@@ -104,9 +99,14 @@ class CalculatorController extends ChangeNotifier {
     salaryCltController.updateValue(model.salaryClt);
     salaryPjController.updateValue(model.salaryPj);
     benefitsController.updateValue(model.benefits);
-    taxesPjController.updateValue(model.taxesPj);
     accountantFeeController.updateValue(model.accountantFee);
-    inssPjController.updateValue(model.inssPj * 100);
+    taxesPjController.text = model.taxesPj
+        .toStringAsFixed(2)
+        .replaceAll('.', ',');
+    inssPjController.text = (model.inssPj * 100)
+        .toStringAsFixed(2)
+        .replaceAll('.', ',');
+
     notifyListeners();
   }
 
@@ -116,8 +116,8 @@ class CalculatorController extends ChangeNotifier {
     salaryCltController.dispose();
     salaryPjController.dispose();
     benefitsController.dispose();
-    taxesPjController.dispose();
     accountantFeeController.dispose();
+    taxesPjController.dispose();
     inssPjController.dispose();
   }
 }

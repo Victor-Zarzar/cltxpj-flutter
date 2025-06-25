@@ -24,7 +24,7 @@ android {
         applicationId = "com.example.cltxpj"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 21
+        minSdk = 25
         targetSdk = 35
         versionCode = 1
         versionName = "1.0.0"
@@ -44,5 +44,5 @@ flutter {
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
